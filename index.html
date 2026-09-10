@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111111">
+
 <title>BETLEX</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -92,7 +94,9 @@ h2 {
     margin-top: 10px;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     width: 100%;
     padding: 12px;
     margin: 7px 0 12px;
@@ -118,6 +122,7 @@ button {
 .delete {
     background: #d93025;
     color: white;
+    margin-top: 8px;
 }
 
 .edit {
@@ -149,13 +154,6 @@ button {
     color: white;
 }
 
-.admin-box {
-    border: 2px dashed #111;
-    padding: 15px;
-    border-radius: 15px;
-    margin-top: 20px;
-}
-
 .small {
     color: #666;
     font-size: 13px;
@@ -172,6 +170,26 @@ button {
     border-radius: 10px;
     margin: 8px 0;
 }
+
+.admin-card {
+    border: 2px solid #111;
+}
+
+.logout {
+    background: #d93025;
+    color: white;
+    width: 100%;
+}
+
+.login-box {
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
 </style>
 </head>
 
@@ -179,19 +197,35 @@ button {
 
 <header>BETLEX</header>
 
+
+<!-- ========================= -->
+<!-- ESPACE UTILISATEUR -->
+<!-- ========================= -->
+
+<div id="publicApp">
+
+
 <!-- PRONOSTICS -->
+
 <section id="pronostics" class="page active">
 
 <h1>🎯 Pronostic du jour</h1>
 
 <p class="small" id="datePronostic"></p>
 
-<div id="listePronostics"></div>
+<div id="listePronostics">
+
+<p class="small">
+Chargement des pronostics...
+</p>
+
+</div>
 
 </section>
 
 
 <!-- MONTANTE -->
+
 <section id="montante" class="page">
 
 <h1>📈 Montante</h1>
@@ -199,15 +233,34 @@ button {
 <div class="card">
 
 <label>Mise de départ (€)</label>
-<input type="number" id="mise" value="10">
+
+<input
+type="number"
+id="mise"
+value="10"
+>
 
 <label>Cote moyenne</label>
-<input type="number" id="coteMoyenne" value="1.50" step="0.01">
+
+<input
+type="number"
+id="coteMoyenne"
+value="1.50"
+step="0.01"
+>
 
 <label>Nombre d'étapes</label>
-<input type="number" id="etapes" value="5">
 
-<button class="primary" onclick="calculerMontante()">
+<input
+type="number"
+id="etapes"
+value="5"
+>
+
+<button
+class="primary"
+onclick="calculerMontante()"
+>
 Calculer
 </button>
 
@@ -219,6 +272,7 @@ Calculer
 
 
 <!-- BILAN -->
+
 <section id="bilan" class="page">
 
 <h1>📊 Bilan</h1>
@@ -227,9 +281,20 @@ Calculer
 
 <h2>Statistiques</h2>
 
-<p>Pronostics : <strong id="totalPronostics">0</strong></p>
-<p>Gagnés : <strong id="gagnes">0</strong></p>
-<p>Perdus : <strong id="perdus">0</strong></p>
+<p>
+Pronostics :
+<strong id="totalPronostics">0</strong>
+</p>
+
+<p>
+Gagnés :
+<strong id="gagnes">0</strong>
+</p>
+
+<p>
+Perdus :
+<strong id="perdus">0</strong>
+</p>
 
 </div>
 
@@ -237,6 +302,7 @@ Calculer
 
 
 <!-- CHAT -->
+
 <section id="chat" class="page">
 
 <h1>💬 Chat</h1>
@@ -244,14 +310,20 @@ Calculer
 <div class="card">
 
 <p class="small">
-Prototype du chat Betlex.
+Prototype du chat BETLEX.
 </p>
 
 <div id="messages"></div>
 
-<input id="messageInput" placeholder="Écrire un message...">
+<input
+id="messageInput"
+placeholder="Écrire un message..."
+>
 
-<button class="primary" onclick="sendMessage()">
+<button
+class="primary"
+onclick="sendMessage()"
+>
 Envoyer
 </button>
 
@@ -261,6 +333,7 @@ Envoyer
 
 
 <!-- BUDGET -->
+
 <section id="budget" class="page">
 
 <h1>💰 Gérer son budget</h1>
@@ -268,12 +341,25 @@ Envoyer
 <div class="card">
 
 <label>Budget disponible (€)</label>
-<input type="number" id="budgetTotal" value="100">
+
+<input
+type="number"
+id="budgetTotal"
+value="100"
+>
 
 <label>Mise prévue (€)</label>
-<input type="number" id="miseBudget" value="5">
 
-<button class="primary" onclick="calculerBudget()">
+<input
+type="number"
+id="miseBudget"
+value="5"
+>
+
+<button
+class="primary"
+onclick="calculerBudget()"
+>
 Calculer
 </button>
 
@@ -285,6 +371,7 @@ Calculer
 
 
 <!-- CONTACT -->
+
 <section id="contact" class="page">
 
 <h1>ℹ️ Contact & présentation</h1>
@@ -306,63 +393,179 @@ Jouez de manière responsable.
 
 </div>
 
+</section>
 
-<div class="admin-box">
 
-<h2>🔐 Administration</h2>
+<!-- NAVIGATION -->
 
-<p class="small">
-Cette version permet de gérer les pronostics
-localement sur cet appareil.
+<nav class="bottom-nav">
+
+<button
+class="active"
+onclick="showPage('pronostics', this)"
+>
+🎯<br>
+Pronostics
+</button>
+
+<button
+onclick="showPage('montante', this)"
+>
+📈<br>
+Montante
+</button>
+
+<button
+onclick="showPage('bilan', this)"
+>
+📊<br>
+Bilan
+</button>
+
+<button
+onclick="showPage('chat', this)"
+>
+💬<br>
+Chat
+</button>
+
+<button
+onclick="showPage('budget', this)"
+>
+💰<br>
+Budget
+</button>
+
+<button
+onclick="showPage('contact', this)"
+>
+ℹ️<br>
+Contact
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- ADMINISTRATION -->
+<!-- ========================= -->
+
+<section
+id="adminLogin"
+class="page"
+>
+
+<div class="login-box">
+
+<h1>🔐 Administration</h1>
+
+<div class="card">
+
+<p>
+Connexion réservée à l'administrateur BETLEX.
 </p>
 
-<button class="primary" onclick="ouvrirAdmin()">
-Ouvrir l'administration
+<label>Email</label>
+
+<input
+type="email"
+id="adminEmail"
+placeholder="Votre email"
+>
+
+<label>Mot de passe</label>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Votre mot de passe"
+>
+
+<button
+class="primary"
+onclick="connexionAdmin()"
+>
+Se connecter
 </button>
+
+<p
+id="loginMessage"
+class="small"
+></p>
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- ADMINISTRATION -->
-<section id="admin" class="page">
+<section
+id="admin"
+class="page"
+>
 
-<h1>🔐 Administration Betlex</h1>
+<h1>🔐 Administration BETLEX</h1>
 
 <div class="card">
 
-<h2>Ajouter / modifier un pronostic</h2>
+<h2>Ajouter un pronostic</h2>
 
 <label>Catégorie</label>
 
 <select id="adminCategorie">
 
-<option value="SAFE">SAFE</option>
-<option value="SEMI-SAFE">SEMI-SAFE</option>
-<option value="FUN">FUN</option>
-<option value="BUTEUR">BUTEUR</option>
+<option value="SAFE">
+SAFE
+</option>
+
+<option value="SEMI-SAFE">
+SEMI-SAFE
+</option>
+
+<option value="FUN">
+FUN
+</option>
+
+<option value="BUTEUR">
+BUTEUR
+</option>
 
 </select>
 
+
 <label>Match / joueur</label>
 
-<input id="adminMatch"
-placeholder="Ex : PSG - Marseille">
+<input
+id="adminMatch"
+placeholder="Ex : PSG - Marseille"
+>
+
 
 <label>Pronostic</label>
 
-<input id="adminPronostic"
-placeholder="Ex : PSG gagne">
+<input
+id="adminPronostic"
+placeholder="Ex : PSG gagne"
+>
+
 
 <label>Cote</label>
 
-<input id="adminCote"
+<input
+id="adminCote"
 type="number"
 step="0.01"
-placeholder="1.50">
+placeholder="1.50"
+>
 
-<button class="primary" onclick="ajouterPronostic()">
+
+<button
+class="primary"
+onclick="ajouterPronostic()"
+>
 ➕ Ajouter le pronostic
 </button>
 
@@ -373,433 +576,1052 @@ placeholder="1.50">
 
 <h2>Pronostics actuels</h2>
 
-<div id="adminListe"></div>
+<div id="adminListe">
+
+<p class="small">
+Chargement...
+</p>
+
+</div>
 
 </div>
 
 
-<button class="edit" onclick="showPage('contact')">
-⬅️ Retour
+<button
+class="logout"
+onclick="deconnexionAdmin()"
+>
+🚪 Se déconnecter
+</button>
+
+<br><br>
+
+<button
+class="edit"
+onclick="retourPublic()"
+>
+⬅️ Retour au site
 </button>
 
 </section>
 
 
-<!-- NAVIGATION -->
+<!-- FIREBASE -->
 
-<nav class="bottom-nav">
+<script type="module">
 
-<button class="active" onclick="showPage('pronostics', this)">
-🎯<br>Pronostics
-</button>
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-<button onclick="showPage('montante', this)">
-📈<br>Montante
-</button>
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-<button onclick="showPage('bilan', this)">
-📊<br>Bilan
-</button>
-
-<button onclick="showPage('chat', this)">
-💬<br>Chat
-</button>
-
-<button onclick="showPage('budget', this)">
-💰<br>Budget
-</button>
-
-<button onclick="showPage('contact', this)">
-ℹ️<br>Contact
-</button>
-
-</nav>
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    deleteDoc,
+    doc,
+    updateDoc,
+    onSnapshot,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
-<script>
+/* =====================================
+   REMPLACE CES INFORMATIONS PAR CELLES
+   DE TON PROJET FIREBASE
+   ===================================== */
 
-let pronostics = JSON.parse(
-    localStorage.getItem("betlexPronostics")
-) || [
+const firebaseConfig = {
 
-{
-    categorie: "SAFE",
-    match: "Équipe A - Équipe B",
-    pronostic: "Plus de 1,5 buts",
-    cote: "1.35"
-},
+    apiKey: "TON_API_KEY",
 
-{
-    categorie: "SEMI-SAFE",
-    match: "Joueur C",
-    pronostic: "1 tir cadré",
-    cote: "1.60"
-},
+    authDomain:
+        "TON_PROJET.firebaseapp.com",
 
-{
-    categorie: "FUN",
-    match: "Équipe D - Équipe E",
-    pronostic: "Victoire Équipe D",
-    cote: "2.20"
-},
+    projectId:
+        "TON_PROJECT_ID",
 
-{
-    categorie: "BUTEUR",
-    match: "Joueur F",
-    pronostic: "Joueur F buteur",
-    cote: "2.10"
-}
+    storageBucket:
+        "TON_PROJECT_ID.firebasestorage.app",
 
-];
+    messagingSenderId:
+        "TON_MESSAGING_SENDER_ID",
+
+    appId:
+        "TON_APP_ID"
+
+};
 
 
-function sauvegarder() {
+/* INITIALISATION */
 
-localStorage.setItem(
-"betlexPronostics",
-JSON.stringify(pronostics)
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getFirestore(app);
+
+
+/* =====================================
+   ADMIN AUTORISÉ
+   ===================================== */
+
+/*
+   IMPORTANT :
+
+   Remplace cette adresse par TON adresse
+   email utilisée pour ton compte Firebase.
+*/
+
+const ADMIN_EMAIL =
+"TON_EMAIL_ADMIN";
+
+
+/* =====================================
+   PRONOSTICS
+   ===================================== */
+
+let pronostics = [];
+
+
+const pronosticsRef =
+collection(db, "pronostics");
+
+
+const pronosticsQuery =
+query(
+    pronosticsRef,
+    orderBy("createdAt", "desc")
 );
 
-}
 
+/* =====================================
+   ÉCOUTE EN TEMPS RÉEL
+   ===================================== */
+
+onSnapshot(
+    pronosticsQuery,
+    (snapshot) => {
+
+        pronostics = [];
+
+        snapshot.forEach((document) => {
+
+            pronostics.push({
+
+                id: document.id,
+
+                ...document.data()
+
+            });
+
+        });
+
+        afficherPronostics();
+
+        afficherAdmin();
+
+    },
+
+    (error) => {
+
+        console.error(error);
+
+        document.getElementById(
+            "listePronostics"
+        ).innerHTML =
+
+        `
+        <div class="card">
+        Impossible de charger les pronostics.
+        </div>
+        `;
+
+    }
+);
+
+
+/* =====================================
+   AFFICHER LES PRONOSTICS
+   ===================================== */
 
 function afficherPronostics() {
 
-const liste =
-document.getElementById("listePronostics");
+    const liste =
+        document.getElementById(
+            "listePronostics"
+        );
 
-liste.innerHTML = "";
+    liste.innerHTML = "";
 
-pronostics.forEach(p => {
 
-let classe = "";
+    if (pronostics.length === 0) {
 
-if(p.categorie === "SAFE")
-classe = "safe";
+        liste.innerHTML = `
+        <div class="card">
+        Aucun pronostic disponible pour le moment.
+        </div>
+        `;
 
-if(p.categorie === "SEMI-SAFE")
-classe = "semi";
+        document.getElementById(
+            "totalPronostics"
+        ).innerText = 0;
 
-if(p.categorie === "FUN")
-classe = "fun";
+        return;
+    }
 
-if(p.categorie === "BUTEUR")
-classe = "buteur";
 
-liste.innerHTML += `
+    pronostics.forEach((p) => {
 
-<div class="card">
+        let classe = "";
 
-<span class="badge ${classe}">
-${p.categorie}
-</span>
 
-<h2>${p.match}</h2>
+        if (p.categorie === "SAFE")
+            classe = "safe";
 
-<p>
-<strong>Pronostic :</strong>
-${p.pronostic}
-</p>
 
-<div class="cote">
-Cote ${p.cote}
-</div>
+        if (p.categorie === "SEMI-SAFE")
+            classe = "semi";
 
-</div>
 
-`;
+        if (p.categorie === "FUN")
+            classe = "fun";
 
-});
 
-document.getElementById("totalPronostics").innerText =
-pronostics.length;
+        if (p.categorie === "BUTEUR")
+            classe = "buteur";
+
+
+        liste.innerHTML += `
+
+        <div class="card">
+
+            <span class="badge ${classe}">
+                ${p.categorie}
+            </span>
+
+            <h2>
+                ${p.match}
+            </h2>
+
+            <p>
+                <strong>Pronostic :</strong>
+                ${p.pronostic}
+            </p>
+
+            <div class="cote">
+                Cote ${p.cote}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    document.getElementById(
+        "totalPronostics"
+    ).innerText = pronostics.length;
 
 }
 
+
+/* =====================================
+   CONNEXION ADMIN
+   ===================================== */
+
+window.connexionAdmin =
+async function() {
+
+    const email =
+        document.getElementById(
+            "adminEmail"
+        ).value.trim();
+
+
+    const password =
+        document.getElementById(
+            "adminPassword"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    if (!email || !password) {
+
+        message.innerText =
+            "Remplis tous les champs.";
+
+        return;
+    }
+
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.innerText =
+            "Email ou mot de passe incorrect.";
+
+    }
+
+};
+
+
+/* =====================================
+   SURVEILLANCE CONNEXION
+   ===================================== */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if (user) {
+
+            if (
+                user.email.toLowerCase()
+                === ADMIN_EMAIL.toLowerCase()
+            ) {
+
+                showAdmin();
+
+            } else {
+
+                signOut(auth);
+
+                alert(
+                    "Ce compte n'est pas autorisé."
+                );
+
+                retourPublic();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   AFFICHER ADMIN
+   ===================================== */
+
+function showAdmin() {
+
+    document.getElementById(
+        "publicApp"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "adminLogin"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "admin"
+    ).classList.add("active");
+
+
+    afficherAdmin();
+
+    window.scrollTo(0, 0);
+
+}
+
+
+/* =====================================
+   ADMIN : AFFICHER LES PRONOSTICS
+   ===================================== */
 
 function afficherAdmin() {
 
-const liste =
-document.getElementById("adminListe");
-
-liste.innerHTML = "";
-
-pronostics.forEach((p, index) => {
-
-liste.innerHTML += `
-
-<div class="card">
-
-<strong>${p.categorie}</strong>
-
-<p>${p.match}</p>
-
-<p>${p.pronostic}</p>
-
-<p>Cote : ${p.cote}</p>
-
-<button class="delete"
-onclick="supprimerPronostic(${index})">
-Supprimer
-</button>
-
-</div>
-
-`;
-
-});
-
-}
+    const liste =
+        document.getElementById(
+            "adminListe"
+        );
 
 
-function ajouterPronostic() {
-
-const categorie =
-document.getElementById("adminCategorie").value;
-
-const match =
-document.getElementById("adminMatch").value;
-
-const pronostic =
-document.getElementById("adminPronostic").value;
-
-const cote =
-document.getElementById("adminCote").value;
+    if (!liste) return;
 
 
-if(!match || !pronostic || !cote) {
-
-alert("Merci de remplir tous les champs.");
-
-return;
-
-}
+    liste.innerHTML = "";
 
 
-pronostics.push({
+    if (pronostics.length === 0) {
 
-categorie: categorie,
-match: match,
-pronostic: pronostic,
-cote: cote
+        liste.innerHTML = `
+        <p class="small">
+        Aucun pronostic.
+        </p>
+        `;
 
-});
-
-
-sauvegarder();
-
-afficherPronostics();
-
-afficherAdmin();
+        return;
+    }
 
 
-document.getElementById("adminMatch").value = "";
-document.getElementById("adminPronostic").value = "";
-document.getElementById("adminCote").value = "";
+    pronostics.forEach((p) => {
 
-alert("Pronostic ajouté !");
+        liste.innerHTML += `
+
+        <div class="card admin-card">
+
+            <strong>
+                ${p.categorie}
+            </strong>
+
+            <p>
+                ${p.match}
+            </p>
+
+            <p>
+                ${p.pronostic}
+            </p>
+
+            <p>
+                Cote : ${p.cote}
+            </p>
+
+            <button
+                class="edit"
+                onclick="modifierPronostic('${p.id}')"
+            >
+                ✏️ Modifier
+            </button>
+
+            <button
+                class="delete"
+                onclick="supprimerPronostic('${p.id}')"
+            >
+                🗑️ Supprimer
+            </button>
+
+        </div>
+
+        `;
+
+    });
 
 }
 
 
-function supprimerPronostic(index) {
+/* =====================================
+   AJOUTER
+   ===================================== */
 
-if(confirm("Supprimer ce pronostic ?")) {
+window.ajouterPronostic =
+async function() {
 
-pronostics.splice(index, 1);
+    if (!auth.currentUser) {
 
-sauvegarder();
+        alert(
+            "Tu dois être connecté."
+        );
 
-afficherPronostics();
+        return;
+    }
 
-afficherAdmin();
 
-}
+    const categorie =
+        document.getElementById(
+            "adminCategorie"
+        ).value;
 
-}
 
+    const match =
+        document.getElementById(
+            "adminMatch"
+        ).value.trim();
 
-function ouvrirAdmin() {
 
-showPage("admin");
+    const pronostic =
+        document.getElementById(
+            "adminPronostic"
+        ).value.trim();
 
-afficherAdmin();
 
-}
+    const cote =
+        document.getElementById(
+            "adminCote"
+        ).value.trim();
 
 
-function showPage(pageId, button) {
+    if (!match || !pronostic || !cote) {
 
-document.querySelectorAll(".page")
-.forEach(page => {
+        alert(
+            "Merci de remplir tous les champs."
+        );
 
-page.classList.remove("active");
+        return;
+    }
 
-});
 
+    try {
 
-document.getElementById(pageId)
-.classList.add("active");
+        await addDoc(
+            collection(db, "pronostics"),
+            {
 
+                categorie:
+                    categorie,
 
-document.querySelectorAll(".bottom-nav button")
-.forEach(btn => {
+                match:
+                    match,
 
-btn.classList.remove("active");
+                pronostic:
+                    pronostic,
 
-});
+                cote:
+                    cote,
 
+                createdAt:
+                    Date.now()
 
-if(button) {
+            }
+        );
 
-button.classList.add("active");
 
-}
+        document.getElementById(
+            "adminMatch"
+        ).value = "";
 
-window.scrollTo(0,0);
 
-}
+        document.getElementById(
+            "adminPronostic"
+        ).value = "";
 
 
-function calculerMontante() {
+        document.getElementById(
+            "adminCote"
+        ).value = "";
 
-let mise =
-parseFloat(document.getElementById("mise").value);
 
-let cote =
-parseFloat(document.getElementById("coteMoyenne").value);
+        alert(
+            "Pronostic ajouté !"
+        );
 
-let etapes =
-parseInt(document.getElementById("etapes").value);
 
+    } catch (error) {
 
-let resultat = mise;
+        console.error(error);
 
-for(let i = 1; i <= etapes; i++) {
+        alert(
+            "Erreur lors de l'ajout."
+        );
 
-resultat *= cote;
+    }
 
-}
+};
 
 
-document.getElementById("resultatMontante").innerHTML = `
+/* =====================================
+   MODIFIER
+   ===================================== */
 
-<div class="card">
+window.modifierPronostic =
+async function(id) {
 
-<h2>Résultat théorique</h2>
+    const p =
+        pronostics.find(
+            item => item.id === id
+        );
 
-<p>
-Après ${etapes} étapes :
-</p>
 
-<h2>${resultat.toFixed(2)} €</h2>
+    if (!p) return;
 
-<p class="small">
-Simulation mathématique uniquement.
-</p>
 
-</div>
+    const match =
+        prompt(
+            "Match / joueur :",
+            p.match
+        );
 
-`;
 
-}
+    if (match === null) return;
 
 
-function calculerBudget() {
+    const pronostic =
+        prompt(
+            "Pronostic :",
+            p.pronostic
+        );
 
-let budget =
-parseFloat(document.getElementById("budgetTotal").value);
 
-let mise =
-parseFloat(document.getElementById("miseBudget").value);
+    if (pronostic === null) return;
 
 
-let pourcentage =
-(mise / budget) * 100;
+    const cote =
+        prompt(
+            "Cote :",
+            p.cote
+        );
 
 
-document.getElementById("resultatBudget").innerHTML = `
+    if (cote === null) return;
 
-<div class="card">
 
-<p>
-Ta mise représente
-<strong>${pourcentage.toFixed(1)}%</strong>
-de ton budget.
-</p>
+    const categorie =
+        prompt(
+            "Catégorie (SAFE / SEMI-SAFE / FUN / BUTEUR) :",
+            p.categorie
+        );
 
-</div>
 
-`;
+    if (categorie === null) return;
 
-}
 
+    try {
 
-function sendMessage() {
+        await updateDoc(
+            doc(
+                db,
+                "pronostics",
+                id
+            ),
+            {
 
-const input =
-document.getElementById("messageInput");
+                match:
+                    match,
 
-const message =
-input.value.trim();
+                pronostic:
+                    pronostic,
 
-if(!message) return;
+                cote:
+                    cote,
 
+                categorie:
+                    categorie.toUpperCase()
 
-const messages =
-JSON.parse(localStorage.getItem("betlexChat"))
-|| [];
+            }
+        );
 
 
-messages.push(message);
+        alert(
+            "Pronostic modifié !"
+        );
 
-localStorage.setItem(
-"betlexChat",
-JSON.stringify(messages)
-);
 
-input.value = "";
+    } catch (error) {
 
-afficherChat();
+        console.error(error);
 
-}
+        alert(
+            "Erreur lors de la modification."
+        );
+
+    }
+
+};
+
+
+/* =====================================
+   SUPPRIMER
+   ===================================== */
+
+window.supprimerPronostic =
+async function(id) {
+
+    if (
+        !confirm(
+            "Supprimer ce pronostic ?"
+        )
+    ) return;
+
+
+    try {
+
+        await deleteDoc(
+            doc(
+                db,
+                "pronostics",
+                id
+            )
+        );
+
+
+        alert(
+            "Pronostic supprimé."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Erreur lors de la suppression."
+        );
+
+    }
+
+};
+
+
+/* =====================================
+   DÉCONNEXION
+   ===================================== */
+
+window.deconnexionAdmin =
+async function() {
+
+    await signOut(auth);
+
+    retourPublic();
+
+};
+
+
+/* =====================================
+   RETOUR SITE
+   ===================================== */
+
+window.retourPublic =
+function() {
+
+    document.getElementById(
+        "admin"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "adminLogin"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "publicApp"
+    ).classList.remove("hidden");
+
+
+    showPage("pronostics");
+
+};
+
+
+/* =====================================
+   NAVIGATION
+   ===================================== */
+
+window.showPage =
+function(pageId, button) {
+
+    document.querySelectorAll(
+        "#publicApp .page"
+    ).forEach(page => {
+
+        page.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    const page =
+        document.getElementById(pageId);
+
+
+    if (page)
+        page.classList.add("active");
+
+
+    document.querySelectorAll(
+        ".bottom-nav button"
+    ).forEach(btn => {
+
+        btn.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    if (button)
+        button.classList.add("active");
+
+
+    window.scrollTo(0, 0);
+
+};
+
+
+/* =====================================
+   MONTANTE
+   ===================================== */
+
+window.calculerMontante =
+function() {
+
+    let mise =
+        parseFloat(
+            document.getElementById(
+                "mise"
+            ).value
+        );
+
+
+    let cote =
+        parseFloat(
+            document.getElementById(
+                "coteMoyenne"
+            ).value
+        );
+
+
+    let etapes =
+        parseInt(
+            document.getElementById(
+                "etapes"
+            ).value
+        );
+
+
+    let resultat = mise;
+
+
+    for (
+        let i = 1;
+        i <= etapes;
+        i++
+    ) {
+
+        resultat *= cote;
+
+    }
+
+
+    document.getElementById(
+        "resultatMontante"
+    ).innerHTML = `
+
+    <div class="card">
+
+        <h2>
+            Résultat théorique
+        </h2>
+
+        <p>
+            Après ${etapes} étapes :
+        </p>
+
+        <h2>
+            ${resultat.toFixed(2)} €
+        </h2>
+
+        <p class="small">
+            Simulation mathématique uniquement.
+        </p>
+
+    </div>
+
+    `;
+
+};
+
+
+/* =====================================
+   BUDGET
+   ===================================== */
+
+window.calculerBudget =
+function() {
+
+    let budget =
+        parseFloat(
+            document.getElementById(
+                "budgetTotal"
+            ).value
+        );
+
+
+    let mise =
+        parseFloat(
+            document.getElementById(
+                "miseBudget"
+            ).value
+        );
+
+
+    if (
+        !budget ||
+        budget <= 0
+    ) return;
+
+
+    let pourcentage =
+        (mise / budget) * 100;
+
+
+    document.getElementById(
+        "resultatBudget"
+    ).innerHTML = `
+
+    <div class="card">
+
+        <p>
+            Ta mise représente
+            <strong>
+                ${pourcentage.toFixed(1)}%
+            </strong>
+            de ton budget.
+        </p>
+
+    </div>
+
+    `;
+
+};
+
+
+/* =====================================
+   CHAT
+   ===================================== */
+
+window.sendMessage =
+function() {
+
+    const input =
+        document.getElementById(
+            "messageInput"
+        );
+
+
+    const message =
+        input.value.trim();
+
+
+    if (!message) return;
+
+
+    const messages =
+        JSON.parse(
+            localStorage.getItem(
+                "betlexChat"
+            )
+        ) || [];
+
+
+    messages.push(message);
+
+
+    localStorage.setItem(
+        "betlexChat",
+        JSON.stringify(messages)
+    );
+
+
+    input.value = "";
+
+
+    afficherChat();
+
+};
 
 
 function afficherChat() {
 
-const messages =
-JSON.parse(localStorage.getItem("betlexChat"))
-|| [];
+    const messages =
+        JSON.parse(
+            localStorage.getItem(
+                "betlexChat"
+            )
+        ) || [];
 
-const zone =
-document.getElementById("messages");
 
-zone.innerHTML = "";
+    const zone =
+        document.getElementById(
+            "messages"
+        );
 
-messages.forEach(message => {
 
-zone.innerHTML += `
+    zone.innerHTML = "";
 
-<div class="chat-message">
-${message}
-</div>
 
-`;
+    messages.forEach(
+        message => {
 
-});
+            zone.innerHTML += `
+
+            <div class="chat-message">
+                ${message}
+            </div>
+
+            `;
+
+        }
+    );
 
 }
 
 
-document.getElementById("datePronostic")
-.innerText =
+/* =====================================
+   DATE
+   ===================================== */
+
+document.getElementById(
+    "datePronostic"
+).innerText =
 "Pronostics du jour — " +
-new Date().toLocaleDateString("fr-FR");
+new Date().toLocaleDateString(
+    "fr-FR"
+);
 
-
-afficherPronostics();
 
 afficherChat();
+
+
+/* =====================================
+   ACCÈS ADMIN
+
+   Pour accéder à la connexion admin,
+   utiliser :
+
+   ?admin
+
+   Exemple :
+
+   https://alexandrehenry038-betlex.github.io/BETLEX/?admin
+   ===================================== */
+
+if (
+    window.location.search
+    === "?admin"
+) {
+
+    document.getElementById(
+        "publicApp"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "adminLogin"
+    ).classList.add("active");
+
+}
 
 </script>
 
