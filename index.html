@@ -27,16 +27,8 @@ header{
   z-index:10;
 }
 
-header h1{
-  font-size:28px;
-  letter-spacing:2px;
-}
-
-header p{
-  color:#9ca3af;
-  margin-top:5px;
-  font-size:13px;
-}
+header h1{font-size:28px;letter-spacing:2px}
+header p{color:#9ca3af;margin-top:5px;font-size:13px}
 
 .page{
   display:none;
@@ -45,13 +37,9 @@ header p{
   padding:20px 15px;
 }
 
-.page.active{
-  display:block;
-}
+.page.active{display:block}
 
-h2{
-  margin-bottom:15px;
-}
+h2{margin-bottom:15px}
 
 .card{
   background:#151e30;
@@ -62,14 +50,9 @@ h2{
   box-shadow:0 5px 18px rgba(0,0,0,.18);
 }
 
-.card h3{
-  margin-bottom:9px;
-}
+.card h3{margin-bottom:9px}
 
-.muted{
-  color:#9ca3af;
-  font-size:13px;
-}
+.muted{color:#9ca3af;font-size:13px}
 
 .badge{
   display:inline-block;
@@ -98,17 +81,10 @@ button{
   color:white;
 }
 
-button:hover{
-  opacity:.9;
-}
+button:hover{opacity:.9}
 
-button.danger{
-  background:#dc2626;
-}
-
-button.secondary{
-  background:#374151;
-}
+button.danger{background:#dc2626}
+button.secondary{background:#374151}
 
 input,select,textarea{
   width:100%;
@@ -154,9 +130,7 @@ label{
   flex:1;
 }
 
-.nav-btn.active{
-  color:#60a5fa;
-}
+.nav-btn.active{color:#60a5fa}
 
 .nav-icon{
   display:block;
@@ -169,21 +143,10 @@ label{
   margin:50px auto;
 }
 
-.hidden{
-  display:none!important;
-}
-
-.center{
-  text-align:center;
-}
-
-.success{
-  color:#4ade80;
-}
-
-.error{
-  color:#f87171;
-}
+.hidden{display:none!important}
+.center{text-align:center}
+.success{color:#4ade80}
+.error{color:#f87171}
 
 .loading{
   text-align:center;
@@ -245,6 +208,62 @@ hr{
   border-top:1px solid #293548;
   margin:15px 0;
 }
+
+.prono-card{
+  position:relative;
+}
+
+.prono-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
+
+.prono-pick{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+.category-safe{background:#166534}
+.category-semi{background:#854d0e}
+.category-fun{background:#7e22ce}
+.category-buteur{background:#0369a1}
+
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#9ca3af;
+}
+
+.admin-item{
+  background:#0f172a;
+  border:1px solid #273449;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:10px;
+}
+
+.admin-item-buttons{
+  display:flex;
+  gap:7px;
+  margin-top:8px;
+}
+
+.admin-item-buttons button{
+  margin-top:0;
+  flex:1;
+}
+
+.firebase-error{
+  background:#451a1a;
+  border:1px solid #7f1d1d;
+  color:#fecaca;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:15px;
+}
 </style>
 </head>
 
@@ -255,261 +274,1055 @@ hr{
   <p>Les pronostics sportifs simplement</p>
 </header>
 
-<!-- ==================== PUBLIC ==================== -->
-
 <main id="publicApp">
 
-  <section id="pronostics" class="page active">
-    <h2>🎯 Pronostics du jour</h2>
-    <div id="publicPronostics">
-      <div class="loading">Chargement des pronostics...</div>
-    </div>
-  </section>
+<section id="pronostics" class="page active">
+  <h2>🎯 Pronostics du jour</h2>
 
-  <section id="montante" class="page">
-    <h2>📈 Calculateur Montante</h2>
+  <div id="firebaseError" class="firebase-error hidden"></div>
 
-    <div class="card">
-      <label>Mise de départ (€)</label>
-      <input id="montanteMise" type="number" step="0.01" value="10">
+  <div id="publicPronostics">
+    <div class="loading">Chargement des pronostics...</div>
+  </div>
+</section>
 
-      <label>Cote moyenne</label>
-      <input id="montanteCote" type="number" step="0.01" value="1.50">
+<section id="montante" class="page">
+  <h2>📈 Calculateur Montante</h2>
 
-      <label>Nombre de paris gagnants</label>
-      <input id="montanteNb" type="number" value="5">
+  <div class="card">
+    <label>Mise de départ (€)</label>
+    <input id="montanteMise" type="number" step="0.01" value="10">
 
-      <button onclick="calculerMontante()">Calculer</button>
+    <label>Cote moyenne</label>
+    <input id="montanteCote" type="number" step="0.01" value="1.50">
 
-      <div id="montanteResult" style="margin-top:15px"></div>
-    </div>
-  </section>
+    <label>Nombre de paris gagnants</label>
+    <input id="montanteNb" type="number" value="5">
 
-  <section id="bilan" class="page">
-    <h2>📊 Bilan BETLEX</h2>
+    <button onclick="calculerMontante()">Calculer</button>
 
-    <div class="stats">
-      <div class="stat">
-        <strong id="statTotal">0</strong>
-        <span class="muted">Pronostics</span>
-      </div>
+    <div id="montanteResult" style="margin-top:15px"></div>
+  </div>
+</section>
 
-      <div class="stat">
-        <strong id="statCote">0.00</strong>
-        <span class="muted">Cote moyenne</span>
-      </div>
+<section id="bilan" class="page">
+  <h2>📊 Bilan BETLEX</h2>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="statTotal">0</strong>
+      <span class="muted">Pronostics</span>
     </div>
 
-    <div class="card" style="margin-top:15px">
-      <p class="muted">
-        Le bilan est calculé automatiquement à partir des pronostics publiés.
-      </p>
+    <div class="stat">
+      <strong id="statCote">0.00</strong>
+      <span class="muted">Cote moyenne</span>
     </div>
-  </section>
+  </div>
 
-  <section id="chat" class="page">
-    <h2>💬 Chat BETLEX</h2>
+  <div class="card" style="margin-top:15px">
+    <p class="muted">
+      Le bilan est calculé automatiquement à partir des pronostics publiés.
+    </p>
+  </div>
+</section>
 
-    <div class="card">
-      <div id="chatMessages" class="chat-box"></div>
+<section id="chat" class="page">
+  <h2>💬 Chat BETLEX</h2>
 
-      <input id="chatName" placeholder="Ton prénom">
-      <textarea id="chatText" placeholder="Ton message..."></textarea>
+  <div class="card">
+    <div id="chatMessages" class="chat-box"></div>
 
-      <button onclick="sendMessage()">Envoyer</button>
-    </div>
+    <input id="chatName" placeholder="Ton prénom">
+    <textarea id="chatText" placeholder="Ton message..."></textarea>
 
-    <div class="card">
-      <p class="muted">
-        Version prototype : les messages sont enregistrés sur l'appareil.
-      </p>
-    </div>
-  </section>
+    <button onclick="sendMessage()">Envoyer</button>
+  </div>
 
-  <section id="budget" class="page">
-    <h2>💰 Gestion du budget</h2>
+  <div class="card">
+    <p class="muted">
+      Version prototype : les messages sont enregistrés sur l'appareil.
+    </p>
+  </div>
+</section>
 
-    <div class="card">
-      <label>Bankroll (€)</label>
-      <input id="budgetBankroll" type="number" step="0.01" value="100">
+<section id="budget" class="page">
+  <h2>💰 Gestion du budget</h2>
 
-      <label>Pourcentage par pari (%)</label>
-      <input id="budgetPercent" type="number" step="0.1" value="2">
+  <div class="card">
+    <label>Bankroll (€)</label>
+    <input id="budgetBankroll" type="number" step="0.01" value="100">
 
-      <button onclick="calculerBudget()">Calculer</button>
+    <label>Pourcentage par pari (%)</label>
+    <input id="budgetPercent" type="number" step="0.1" value="2">
 
-      <div id="budgetResult" style="margin-top:15px"></div>
-    </div>
-  </section>
+    <button onclick="calculerBudget()">Calculer</button>
 
-  <section id="contact" class="page">
-    <h2>ℹ️ À propos de BETLEX</h2>
+    <div id="budgetResult" style="margin-top:15px"></div>
+  </div>
+</section>
 
-    <div class="card">
-      <h3>BETLEX</h3>
-      <p class="muted">
-        BETLEX propose des pronostics sportifs classés par niveau de risque,
-        ainsi que des outils pour mieux gérer sa bankroll.
-      </p>
-    </div>
+<section id="contact" class="page">
+  <h2>ℹ️ À propos de BETLEX</h2>
 
-    <div class="card">
-      <h3>⚠️ Attention</h3>
-      <p class="muted">
-        Les paris sportifs comportent des risques financiers.
-        Aucun pronostic n'est garanti. Jouez de manière responsable et
-        uniquement avec de l'argent que vous pouvez vous permettre de perdre.
-      </p>
-    </div>
-  </section>
+  <div class="card">
+    <h3>BETLEX</h3>
+    <p class="muted">
+      BETLEX propose des pronostics sportifs classés par niveau de risque,
+      ainsi que des outils pour mieux gérer sa bankroll.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>⚠️ Attention</h3>
+    <p class="muted">
+      Les paris sportifs comportent des risques financiers.
+      Aucun pronostic n'est garanti. Jouez de manière responsable et
+      uniquement avec de l'argent que vous pouvez vous permettre de perdre.
+    </p>
+  </div>
+
+  <div class="card center">
+    <button onclick="ouvrirAdmin()">🔐 Administration</button>
+  </div>
+</section>
 
 </main>
 
-<!-- ==================== NAVIGATION ==================== -->
-
 <nav class="bottom-nav" id="bottomNav">
 
-  <button class="nav-btn active" onclick="showPage('pronostics',this)">
-    <span class="nav-icon">🎯</span>
-    Pronostics
-  </button>
+<button class="nav-btn active" onclick="showPage('pronostics',this)">
+  <span class="nav-icon">🎯</span>
+  Pronostics
+</button>
 
-  <button class="nav-btn" onclick="showPage('montante',this)">
-    <span class="nav-icon">📈</span>
-    Montante
-  </button>
+<button class="nav-btn" onclick="showPage('montante',this)">
+  <span class="nav-icon">📈</span>
+  Montante
+</button>
 
-  <button class="nav-btn" onclick="showPage('bilan',this)">
-    <span class="nav-icon">📊</span>
-    Bilan
-  </button>
+<button class="nav-btn" onclick="showPage('bilan',this)">
+  <span class="nav-icon">📊</span>
+  Bilan
+</button>
 
-  <button class="nav-btn" onclick="showPage('chat',this)">
-    <span class="nav-icon">💬</span>
-    Chat
-  </button>
+<button class="nav-btn" onclick="showPage('chat',this)">
+  <span class="nav-icon">💬</span>
+  Chat
+</button>
 
-  <button class="nav-btn" onclick="showPage('budget',this)">
-    <span class="nav-icon">💰</span>
-    Budget
-  </button>
+<button class="nav-btn" onclick="showPage('budget',this)">
+  <span class="nav-icon">💰</span>
+  Budget
+</button>
 
-  <button class="nav-btn" onclick="showPage('contact',this)">
-    <span class="nav-icon">ℹ️</span>
-    Infos
-  </button>
+<button class="nav-btn" onclick="showPage('contact',this)">
+  <span class="nav-icon">ℹ️</span>
+  Infos
+</button>
 
 </nav>
 
-<!-- ==================== ADMIN ==================== -->
-
 <section id="adminApp" class="hidden">
 
-  <div class="page active">
+<div class="page active">
 
-    <!-- Connexion -->
-    <div id="adminLogin" class="admin-login">
+<div id="adminLogin" class="admin-login">
 
-      <div class="card">
+<div class="card">
 
-        <h2>🔐 Administration BETLEX</h2>
+<h2>🔐 Administration BETLEX</h2>
 
-        <p class="muted">
-          Accès réservé à l'administrateur.
-        </p>
+<p class="muted">
+Accès réservé à l'administrateur.
+</p>
 
-        <br>
+<br>
 
-        <label>Adresse e-mail</label>
-        <input id="adminEmail" type="email" placeholder="Adresse e-mail">
+<label>Adresse e-mail</label>
+<input id="adminEmail" type="email" placeholder="Adresse e-mail">
 
-        <label>Mot de passe</label>
-        <input id="adminPassword" type="password" placeholder="Mot de passe">
+<label>Mot de passe</label>
+<input id="adminPassword" type="password" placeholder="Mot de passe">
 
-        <button onclick="connexionAdmin()">
-          Se connecter
-        </button>
+<button onclick="connexionAdmin()">
+Se connecter
+</button>
 
-        <p id="loginMessage" style="margin-top:12px"></p>
+<button class="secondary" onclick="retourSite()">
+← Retour au site
+</button>
 
-      </div>
+<p id="loginMessage" style="margin-top:12px"></p>
 
-    </div>
+</div>
+</div>
 
-    <!-- Administration -->
-    <div id="adminPanel" class="hidden">
+<div id="adminPanel" class="hidden">
 
-      <div class="card">
+<div class="card">
 
-        <h2>⚙️ Administration BETLEX</h2>
+<h2>⚙️ Administration BETLEX</h2>
 
-        <p class="muted">
-          Connecté en tant qu'administrateur.
-        </p>
+<p class="muted">
+Connecté en tant qu'administrateur.
+</p>
 
-        <button class="secondary" onclick="retourSite()">
-          ← Retour au site
-        </button>
+<button class="secondary" onclick="retourSite()">
+← Retour au site
+</button>
 
-        <button class="danger" onclick="deconnexionAdmin()">
-          Se déconnecter
-        </button>
+<button class="danger" onclick="deconnexionAdmin()">
+Se déconnecter
+</button>
 
-      </div>
+</div>
 
-      <div class="card">
+<div class="card">
 
-        <h2 id="formTitle">➕ Ajouter un pronostic</h2>
+<h2 id="formTitle">➕ Ajouter un pronostic</h2>
 
-        <label>Catégorie</label>
-        <select id="adminCategorie">
-          <option value="SAFE">SAFE</option>
-          <option value="SEMI-SAFE">SEMI-SAFE</option>
-          <option value="FUN">FUN</option>
-          <option value="BUTEUR">BUTEUR</option>
-        </select>
+<label>Catégorie</label>
 
-        <label>Match / Joueur</label>
-        <input id="adminMatch" placeholder="Ex : PSG - Marseille">
+<select id="adminCategorie">
+<option value="SAFE">SAFE</option>
+<option value="SEMI-SAFE">SEMI-SAFE</option>
+<option value="FUN">FUN</option>
+<option value="BUTEUR">BUTEUR</option>
+</select>
 
-        <label>Pronostic</label>
-        <input id="adminPronostic" placeholder="Ex : PSG gagne">
+<label>Match / Joueur</label>
+<input id="adminMatch" placeholder="Ex : PSG - Marseille">
 
-        <label>Cote</label>
-        <input id="adminCote" type="number" step="0.01" placeholder="1.50">
+<label>Pronostic</label>
+<input id="adminPronostic" placeholder="Ex : PSG gagne">
 
-        <div class="admin-actions">
+<label>Cote</label>
+<input id="adminCote" type="number" step="0.01" placeholder="1.50">
 
-          <button onclick="enregistrerPronostic()">
-            💾 Enregistrer
-          </button>
+<div class="admin-actions">
 
-          <button class="secondary hidden" id="cancelEdit" onclick="annulerModification()">
-            Annuler
-          </button>
+<button onclick="enregistrerPronostic()">
+💾 Enregistrer
+</button>
 
-        </div>
+<button class="secondary hidden" id="cancelEdit" onclick="annulerModification()">
+Annuler
+</button>
 
-        <p id="adminMessage" style="margin-top:12px"></p>
+</div>
 
-      </div>
+<p id="adminMessage" style="margin-top:12px"></p>
 
-      <div class="card">
+</div>
 
-        <h2>📋 Pronostics actuels</h2>
+<div class="card">
 
-        <div id="adminPronostics">
-          <div class="loading">Chargement...</div>
-        </div>
+<h2>📋 Pronostics actuels</h2>
 
-      </div>
+<div id="adminPronostics">
+<div class="loading">Chargement...</div>
+</div>
 
-    </div>
+</div>
 
-  </div>
-
+</div>
+</div>
 </section>
 
 <script type="module">
 
-/
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue,
+  push,
+  set,
+  update,
+  remove
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBPFuq1xSlHn2HgsBiAqn-BprAIkzWTXio",
+  authDomain: "betlex-b2c4b.firebaseapp.com",
+  databaseURL: "https://betlex-b2c4b-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "betlex-b2c4b",
+  storageBucket: "betlex-b2c4b.firebasestorage.app",
+  messagingSenderId: "916203426560",
+  appId: "1:916203426560:web:8375461554d7921d3c99e5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+window.showPage = function(pageId, button){
+
+  document.querySelectorAll(".page").forEach(page=>{
+    page.classList.remove("active");
+  });
+
+  const page = document.getElementById(pageId);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  if(button){
+    button.classList.add("active");
+  }
+};
+
+
+/* =========================
+   AFFICHAGE PRONOSTICS
+========================= */
+
+let pronosticsData = {};
+let editingId = null;
+
+function afficherCategorie(categorie){
+
+  if(categorie === "SAFE"){
+    return "category-safe";
+  }
+
+  if(categorie === "SEMI-SAFE"){
+    return "category-semi";
+  }
+
+  if(categorie === "FUN"){
+    return "category-fun";
+  }
+
+  if(categorie === "BUTEUR"){
+    return "category-buteur";
+  }
+
+  return "";
+}
+
+
+function afficherPronostics(data){
+
+  pronosticsData = data || {};
+
+  const container = document.getElementById("publicPronostics");
+
+  container.innerHTML = "";
+
+  const liste = Object.entries(pronosticsData);
+
+  if(liste.length === 0){
+
+    container.innerHTML = `
+      <div class="card empty">
+        Aucun pronostic publié pour le moment.
+      </div>
+    `;
+
+    mettreAJourBilan([]);
+
+    return;
+  }
+
+  liste.reverse();
+
+  const pronostics = [];
+
+  liste.forEach(([id,p])=>{
+
+    if(!p) return;
+
+    const categorie = p.categorie || "SAFE";
+    const match = p.match || "Match non renseigné";
+    const pronostic = p.pronostic || "Pronostic non renseigné";
+    const cote = Number(p.cote || 0);
+
+    pronostics.push(p);
+
+    const date = p.date
+      ? new Date(p.date).toLocaleDateString("fr-FR")
+      : "";
+
+    const card = document.createElement("div");
+
+    card.className = "card prono-card";
+
+    card.innerHTML = `
+      <div class="prono-top">
+        <span class="badge ${afficherCategorie(categorie)}">
+          ${escapeHtml(categorie)}
+        </span>
+
+        <span class="small">${escapeHtml(date)}</span>
+      </div>
+
+      <h3>${escapeHtml(match)}</h3>
+
+      <div class="prono-pick">
+        ${escapeHtml(pronostic)}
+      </div>
+
+      <div class="cote">
+        Cote ${cote ? cote.toFixed(2) : "—"}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  mettreAJourBilan(pronostics);
+}
+
+
+function mettreAJourBilan(liste){
+
+  document.getElementById("statTotal").textContent = liste.length;
+
+  if(liste.length === 0){
+
+    document.getElementById("statCote").textContent = "0.00";
+
+    return;
+  }
+
+  let total = 0;
+  let nombre = 0;
+
+  liste.forEach(p=>{
+
+    const cote = Number(p.cote);
+
+    if(!isNaN(cote) && cote > 0){
+
+      total += cote;
+      nombre++;
+    }
+
+  });
+
+  const moyenne = nombre ? total / nombre : 0;
+
+  document.getElementById("statCote").textContent =
+    moyenne.toFixed(2);
+}
+
+
+/* =========================
+   CHARGEMENT FIREBASE
+========================= */
+
+function chargerPronostics(){
+
+  const pronosticsRef = ref(db,"pronostics");
+
+  onValue(
+    pronosticsRef,
+
+    snapshot=>{
+
+      const data = snapshot.val();
+
+      afficherPronostics(data);
+
+      afficherAdminPronostics(data);
+
+      document.getElementById("firebaseError")
+        .classList.add("hidden");
+
+    },
+
+    error=>{
+
+      console.error(error);
+
+      document.getElementById("publicPronostics").innerHTML = `
+        <div class="card">
+          <p class="error">
+            Impossible de charger les pronostics.
+          </p>
+
+          <p class="muted" style="margin-top:8px">
+            Vérifie les règles de sécurité Firebase Realtime Database.
+          </p>
+        </div>
+      `;
+
+      const errorBox =
+        document.getElementById("firebaseError");
+
+      errorBox.textContent =
+        "Firebase : accès aux pronostics refusé. Vérifie les règles Realtime Database.";
+
+      errorBox.classList.remove("hidden");
+    }
+  );
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+window.ouvrirAdmin = function(){
+
+  document.getElementById("publicApp")
+    .classList.add("hidden");
+
+  document.getElementById("bottomNav")
+    .classList.add("hidden");
+
+  document.getElementById("mainHeader")
+    .classList.add("hidden");
+
+  document.getElementById("adminApp")
+    .classList.remove("hidden");
+};
+
+
+window.retourSite = function(){
+
+  document.getElementById("adminApp")
+    .classList.add("hidden");
+
+  document.getElementById("publicApp")
+    .classList.remove("hidden");
+
+  document.getElementById("bottomNav")
+    .classList.remove("hidden");
+
+  document.getElementById("mainHeader")
+    .classList.remove("hidden");
+};
+
+
+window.connexionAdmin = async function(){
+
+  const email =
+    document.getElementById("adminEmail").value.trim();
+
+  const password =
+    document.getElementById("adminPassword").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  message.textContent = "Connexion...";
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    message.textContent = "";
+
+  }catch(error){
+
+    console.error(error);
+
+    message.className = "error";
+
+    message.textContent =
+      "Connexion impossible. Vérifie ton e-mail et ton mot de passe.";
+  }
+};
+
+
+window.deconnexionAdmin = async function(){
+
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+};
+
+
+onAuthStateChanged(auth,user=>{
+
+  const login =
+    document.getElementById("adminLogin");
+
+  const panel =
+    document.getElementById("adminPanel");
+
+  if(user){
+
+    login.classList.add("hidden");
+    panel.classList.remove("hidden");
+
+    afficherAdminPronostics(pronosticsData);
+
+  }else{
+
+    login.classList.remove("hidden");
+    panel.classList.add("hidden");
+
+  }
+
+});
+
+
+/* =========================
+   AJOUT / MODIFICATION
+========================= */
+
+window.enregistrerPronostic = async function(){
+
+  if(!auth.currentUser){
+
+    document.getElementById("adminMessage").textContent =
+      "Tu dois être connecté.";
+
+    return;
+  }
+
+  const categorie =
+    document.getElementById("adminCategorie").value;
+
+  const match =
+    document.getElementById("adminMatch").value.trim();
+
+  const pronostic =
+    document.getElementById("adminPronostic").value.trim();
+
+  const cote =
+    Number(document.getElementById("adminCote").value);
+
+  const message =
+    document.getElementById("adminMessage");
+
+  if(!match || !pronostic || !cote){
+
+    message.className = "error";
+    message.textContent =
+      "Remplis tous les champs.";
+
+    return;
+  }
+
+  const donnees = {
+
+    categorie: categorie,
+
+    match: match,
+
+    pronostic: pronostic,
+
+    cote: cote,
+
+    date: Date.now()
+
+  };
+
+  try{
+
+    if(editingId){
+
+      await update(
+        ref(db,"pronostics/" + editingId),
+        donnees
+      );
+
+      message.className = "success";
+      message.textContent =
+        "Pronostic modifié !";
+
+      editingId = null;
+
+      document.getElementById("formTitle").textContent =
+        "➕ Ajouter un pronostic";
+
+      document.getElementById("cancelEdit")
+        .classList.add("hidden");
+
+    }else{
+
+      const nouveau =
+        push(ref(db,"pronostics"));
+
+      await set(nouveau,donnees);
+
+      message.className = "success";
+      message.textContent =
+        "Pronostic publié !";
+    }
+
+    viderFormulaire();
+
+  }catch(error){
+
+    console.error(error);
+
+    message.className = "error";
+
+    message.textContent =
+      "Erreur Firebase : impossible d'enregistrer.";
+
+  }
+
+};
+
+
+window.modifierPronostic = function(id){
+
+  const p = pronosticsData[id];
+
+  if(!p) return;
+
+  editingId = id;
+
+  document.getElementById("adminCategorie").value =
+    p.categorie || "SAFE";
+
+  document.getElementById("adminMatch").value =
+    p.match || "";
+
+  document.getElementById("adminPronostic").value =
+    p.pronostic || "";
+
+  document.getElementById("adminCote").value =
+    p.cote || "";
+
+  document.getElementById("formTitle").textContent =
+    "✏️ Modifier le pronostic";
+
+  document.getElementById("cancelEdit")
+    .classList.remove("hidden");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+};
+
+
+window.annulerModification = function(){
+
+  editingId = null;
+
+  viderFormulaire();
+
+  document.getElementById("formTitle").textContent =
+    "➕ Ajouter un pronostic";
+
+  document.getElementById("cancelEdit")
+    .classList.add("hidden");
+
+};
+
+
+window.supprimerPronostic = async function(id){
+
+  if(!auth.currentUser) return;
+
+  const confirmation =
+    confirm("Supprimer ce pronostic ?");
+
+  if(!confirmation) return;
+
+  try{
+
+    await remove(
+      ref(db,"pronostics/" + id)
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Impossible de supprimer le pronostic.");
+
+  }
+
+};
+
+
+function viderFormulaire(){
+
+  document.getElementById("adminMatch").value = "";
+  document.getElementById("adminPronostic").value = "";
+  document.getElementById("adminCote").value = "";
+
+}
+
+
+/* =========================
+   ADMIN LISTE
+========================= */
+
+function afficherAdminPronostics(data){
+
+  const container =
+    document.getElementById("adminPronostics");
+
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  const liste =
+    Object.entries(data || {});
+
+  if(liste.length === 0){
+
+    container.innerHTML = `
+      <div class="empty">
+        Aucun pronostic.
+      </div>
+    `;
+
+    return;
+  }
+
+  liste.reverse();
+
+  liste.forEach(([id,p])=>{
+
+    if(!p) return;
+
+    const item =
+      document.createElement("div");
+
+    item.className = "admin-item";
+
+    item.innerHTML = `
+      <strong>${escapeHtml(p.match || "")}</strong>
+
+      <p class="muted">
+        ${escapeHtml(p.pronostic || "")}
+        · Cote ${Number(p.cote || 0).toFixed(2)}
+      </p>
+
+      <div class="admin-item-buttons">
+
+        <button
+          onclick="modifierPronostic('${id}')">
+          ✏️ Modifier
+        </button>
+
+        <button
+          class="danger"
+          onclick="supprimerPronostic('${id}')">
+          🗑️ Supprimer
+        </button>
+
+      </div>
+    `;
+
+    container.appendChild(item);
+
+  });
+
+}
+
+
+/* =========================
+   MONTANTE
+========================= */
+
+window.calculerMontante = function(){
+
+  const mise =
+    Number(document.getElementById("montanteMise").value);
+
+  const cote =
+    Number(document.getElementById("montanteCote").value);
+
+  const nb =
+    Number(document.getElementById("montanteNb").value);
+
+  if(mise <= 0 || cote <= 0 || nb <= 0){
+
+    document.getElementById("montanteResult").innerHTML =
+      `<p class="error">Vérifie les valeurs.</p>`;
+
+    return;
+  }
+
+  const resultat =
+    mise * Math.pow(cote,nb);
+
+  document.getElementById("montanteResult").innerHTML = `
+    <div class="card">
+      <p class="muted">Capital final théorique</p>
+      <strong style="font-size:28px">
+        ${resultat.toFixed(2)} €
+      </strong>
+    </div>
+  `;
+
+};
+
+
+/* =========================
+   BUDGET
+========================= */
+
+window.calculerBudget = function(){
+
+  const bankroll =
+    Number(document.getElementById("budgetBankroll").value);
+
+  const percent =
+    Number(document.getElementById("budgetPercent").value);
+
+  if(bankroll <= 0 || percent <= 0){
+
+    document.getElementById("budgetResult").innerHTML =
+      `<p class="error">Vérifie les valeurs.</p>`;
+
+    return;
+  }
+
+  const mise =
+    bankroll * percent / 100;
+
+  document.getElementById("budgetResult").innerHTML = `
+    <div class="card">
+      <p class="muted">Mise conseillée selon ton pourcentage</p>
+      <strong style="font-size:28px">
+        ${mise.toFixed(2)} €
+      </strong>
+    </div>
+  `;
+
+};
+
+
+/* =========================
+   CHAT LOCAL
+========================= */
+
+function chargerChat(){
+
+  const messages =
+    JSON.parse(localStorage.getItem("betlexChat") || "[]");
+
+  const container =
+    document.getElementById("chatMessages");
+
+  container.innerHTML = "";
+
+  messages.forEach(m=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "message";
+
+    div.innerHTML = `
+      <strong>${escapeHtml(m.name)}</strong>
+      <p>${escapeHtml(m.text)}</p>
+      <span class="small">${escapeHtml(m.date)}</span>
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+
+window.sendMessage = function(){
+
+  const name =
+    document.getElementById("chatName").value.trim();
+
+  const text =
+    document.getElementById("chatText").value.trim();
+
+  if(!name || !text){
+
+    alert("Remplis ton prénom et ton message.");
+
+    return;
+  }
+
+  const messages =
+    JSON.parse(localStorage.getItem("betlexChat") || "[]");
+
+  messages.push({
+
+    name:name,
+
+    text:text,
+
+    date:new Date().toLocaleString("fr-FR")
+
+  });
+
+  localStorage.setItem(
+    "betlexChat",
+    JSON.stringify(messages)
+  );
+
+  document.getElementById("chatText").value = "";
+
+  chargerChat();
+
+};
+
+
+/* =========================
+   SÉCURITÉ AFFICHAGE TEXTE
+========================= */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================
+   DÉMARRAGE
+========================= */
+
+chargerPronostics();
+chargerChat();
+
+</script>
+
+</body>
+</html>
