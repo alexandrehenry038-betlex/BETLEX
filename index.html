@@ -3,795 +3,1088 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#111827">
 <title>BETLEX</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#0b1020;
-  color:#fff;
-  min-height:100vh;
-  padding-bottom:80px;
+* {
+  box-sizing: border-box;
 }
 
-header{
-  background:#111827;
-  padding:18px 15px;
-  text-align:center;
-  border-bottom:1px solid #263248;
-  position:sticky;
-  top:0;
-  z-index:10;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #111827;
+  padding-bottom: 75px;
 }
 
-header h1{font-size:28px;letter-spacing:2px}
-header p{color:#9ca3af;margin-top:5px;font-size:13px}
-
-.page{
-  display:none;
-  max-width:700px;
-  margin:auto;
-  padding:20px 15px;
+header {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
 }
 
-.page.active{display:block}
-
-h2{margin-bottom:15px}
-
-.card{
-  background:#151e30;
-  border:1px solid #273449;
-  border-radius:15px;
-  padding:17px;
-  margin-bottom:14px;
-  box-shadow:0 5px 18px rgba(0,0,0,.18);
+header h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 2px;
 }
 
-.card h3{margin-bottom:9px}
-
-.muted{color:#9ca3af;font-size:13px}
-
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-  margin-bottom:9px;
-  background:#263248;
+header p {
+  margin: 8px 0 0;
+  color: #d1d5db;
 }
 
-.cote{
-  font-size:23px;
-  font-weight:bold;
-  margin-top:10px;
+.page {
+  display: none;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px 15px;
 }
 
-button{
-  border:none;
-  border-radius:10px;
-  padding:11px 14px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-top:8px;
-  background:#2563eb;
-  color:white;
+.page.active {
+  display: block;
 }
 
-button:hover{opacity:.9}
-
-button.danger{background:#dc2626}
-button.secondary{background:#374151}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin-top:7px;
-  margin-bottom:12px;
-  border-radius:9px;
-  border:1px solid #344258;
-  background:#0f172a;
-  color:white;
-  font-size:15px;
+h2 {
+  margin-top: 5px;
 }
 
-textarea{
-  min-height:90px;
-  resize:vertical;
+h3 {
+  margin-bottom: 8px;
 }
 
-label{
-  font-size:13px;
-  color:#cbd5e1;
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
 
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#111827;
-  border-top:1px solid #263248;
-  display:flex;
-  justify-content:space-around;
-  padding:9px 3px;
-  z-index:20;
+.muted {
+  color: #6b7280;
 }
 
-.nav-btn{
-  background:none;
-  color:#9ca3af;
-  padding:5px 3px;
-  margin:0;
-  font-size:11px;
-  flex:1;
+.badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.nav-btn.active{color:#60a5fa}
-
-.nav-icon{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
+.badge-safe {
+  background: #dcfce7;
+  color: #166534;
 }
 
-.admin-login{
-  max-width:450px;
-  margin:50px auto;
+.badge-semi {
+  background: #fef3c7;
+  color: #92400e;
 }
 
-.hidden{display:none!important}
-.center{text-align:center}
-.success{color:#4ade80}
-.error{color:#f87171}
-
-.loading{
-  text-align:center;
-  padding:30px;
-  color:#9ca3af;
+.badge-fun {
+  background: #ede9fe;
+  color: #6d28d9;
 }
 
-.admin-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+.badge-buteur {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
-.admin-actions button{
-  flex:1;
-  min-width:100px;
+.cote {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+.result-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
-.stat{
-  background:#151e30;
-  border:1px solid #273449;
-  border-radius:14px;
-  padding:18px;
-  text-align:center;
+.result-pending {
+  background: #e5e7eb;
+  color: #374151;
 }
 
-.stat strong{
-  display:block;
-  font-size:25px;
-  margin-bottom:5px;
+.result-won {
+  background: #dcfce7;
+  color: #166534;
 }
 
-.chat-box{
-  max-height:350px;
-  overflow-y:auto;
-  margin-bottom:10px;
+.result-lost {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
-.message{
-  background:#1e293b;
-  border-radius:10px;
-  padding:10px;
-  margin-bottom:8px;
+.result-void {
+  background: #f3f4f6;
+  color: #4b5563;
 }
 
-.small{
-  font-size:12px;
-  color:#94a3b8;
+button {
+  border: none;
+  border-radius: 9px;
+  padding: 11px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #111827;
+  color: white;
+  margin-top: 8px;
 }
 
-hr{
-  border:0;
-  border-top:1px solid #293548;
-  margin:15px 0;
+button:hover {
+  opacity: 0.9;
 }
 
-.prono-card{
-  position:relative;
+button.secondary {
+  background: #6b7280;
 }
 
-.prono-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
+button.success {
+  background: #16a34a;
 }
 
-.prono-pick{
-  font-size:18px;
-  font-weight:bold;
-  margin-top:7px;
+button.danger {
+  background: #dc2626;
 }
 
-.category-safe{background:#166534}
-.category-semi{background:#854d0e}
-.category-fun{background:#7e22ce}
-.category-buteur{background:#0369a1}
-
-.empty{
-  text-align:center;
-  padding:25px;
-  color:#9ca3af;
+button.warning {
+  background: #d97706;
 }
 
-.admin-item{
-  background:#0f172a;
-  border:1px solid #273449;
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:10px;
+button.info {
+  background: #2563eb;
 }
 
-.admin-item-buttons{
-  display:flex;
-  gap:7px;
-  margin-top:8px;
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
 }
 
-.admin-item-buttons button{
-  margin-top:0;
-  flex:1;
+textarea {
+  min-height: 90px;
+  resize: vertical;
 }
 
-.firebase-error{
-  background:#451a1a;
-  border:1px solid #7f1d1d;
-  color:#fecaca;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:15px;
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
 }
 
-#adminApp{
-  min-height:100vh;
-  background:#0b1020;
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
 }
 
-#adminApp .page{
-  min-height:100vh;
+.bottom-nav button {
+  background: transparent;
+  color: #374151;
+  margin: 0;
+  padding: 10px 4px;
+  border-radius: 0;
+  flex: 1;
+  font-size: 11px;
 }
 
+.bottom-nav button.active {
+  color: #111827;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.loading {
+  text-align: center;
+  padding: 25px;
+  color: #6b7280;
+}
+
+.firebase-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 15px;
+}
+
+.admin {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px 15px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.admin-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.admin-buttons button {
+  margin-top: 0;
+  font-size: 12px;
+  padding: 9px 10px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+.chat {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.message {
+  background: #f3f4f6;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.message strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 20px 0;
+}
+
+.prono-card {
+  position: relative;
+}
+
+.prono-date {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.empty {
+  text-align: center;
+  padding: 30px 15px;
+  color: #6b7280;
+}
+
+.category-title {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.editor-section {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.editor-section h3 {
+  margin-top: 0;
+}
+
+.editor-section textarea {
+  min-height: 80px;
+}
+
+.content-success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.content-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.form-actions button {
+  margin-top: 0;
+}
+
+@media (min-width: 700px) {
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header id="mainHeader">
-  <h1>BETLEX</h1>
-  <p>Les pronostics sportifs simplement</p>
+  <h1 id="txtHeaderTitle">BETLEX</h1>
+  <p id="txtHeaderSubtitle">Les pronostics sportifs simplement</p>
 </header>
 
-<main id="publicApp">
+<!-- ================= PRONOSTICS ================= -->
 
 <section id="pronostics" class="page active">
-
-  <h2>🎯 Pronostics du jour</h2>
+  <h2 id="txtPronosticsTitle">🎯 Pronostics du jour</h2>
 
   <div id="firebaseError" class="firebase-error hidden"></div>
 
   <div id="publicPronostics">
-    <div class="loading">
+    <div class="loading" id="txtFirebaseLoading">
       Chargement des pronostics...
     </div>
   </div>
-
 </section>
 
+<!-- ================= MONTANTE ================= -->
 
 <section id="montante" class="page">
-
-  <h2>📈 Calculateur Montante</h2>
+  <h2 id="txtMontanteTitle">📈 Montante</h2>
 
   <div class="card">
-
-    <label>Mise de départ (€)</label>
-
+    <label id="txtMontanteMiseLabel">
+      Mise de départ
+    </label>
     <input
       id="montanteMise"
       type="number"
+      min="0"
       step="0.01"
-      value="10"
+      placeholder="Exemple : 10"
     >
 
-    <label>Cote moyenne</label>
-
+    <label id="txtMontanteCoteLabel">
+      Cote moyenne
+    </label>
     <input
       id="montanteCote"
       type="number"
+      min="1"
       step="0.01"
-      value="1.50"
+      placeholder="Exemple : 1.50"
     >
 
-    <label>Nombre de paris gagnants</label>
-
+    <label id="txtMontanteNbLabel">
+      Nombre de paris
+    </label>
     <input
       id="montanteNb"
       type="number"
-      value="5"
+      min="1"
+      step="1"
+      placeholder="Exemple : 5"
     >
 
-    <button onclick="calculerMontante()">
+    <button id="calculerMontante">
       Calculer
     </button>
 
-    <div
-      id="montanteResult"
-      style="margin-top:15px"
-    ></div>
-
+    <div id="montanteResult"></div>
   </div>
 
+  <div class="card">
+    <p id="txtMontanteDescription">
+      La montante permet de voir l'évolution théorique d'une mise
+      lorsqu'une partie des gains est réinvestie.
+    </p>
+  </div>
 </section>
 
+<!-- ================= BILAN ================= -->
 
 <section id="bilan" class="page">
+  <h2 id="txtBilanTitle">📊 Bilan</h2>
 
-  <h2>📊 Bilan BETLEX</h2>
+  <div class="card">
+    <div class="stats">
 
-  <div class="stats">
+      <div class="stat">
+        <span id="txtBilanTotal">Total</span>
+        <strong id="statTotal">0</strong>
+      </div>
 
-    <div class="stat">
+      <div class="stat">
+        <span id="txtBilanWon">Gagnés</span>
+        <strong id="statWon">0</strong>
+      </div>
 
-      <strong id="statTotal">0</strong>
+      <div class="stat">
+        <span id="txtBilanLost">Perdus</span>
+        <strong id="statLost">0</strong>
+      </div>
 
-      <span class="muted">
-        Pronostics
-      </span>
+      <div class="stat">
+        <span id="txtBilanPending">En attente</span>
+        <strong id="statPending">0</strong>
+      </div>
+
+      <div class="stat">
+        <span id="txtBilanWinRate">Taux de réussite</span>
+        <strong id="statWinRate">0%</strong>
+      </div>
+
+      <div class="stat">
+        <span id="txtBilanProfit">Bénéfice</span>
+        <strong id="statProfit">0.00 u</strong>
+      </div>
+
+      <div class="stat">
+        <span id="txtBilanAverageLabel">Cote moyenne</span>
+        <strong id="statCote">0.00</strong>
+      </div>
 
     </div>
-
-    <div class="stat">
-
-      <strong id="statCote">0.00</strong>
-
-      <span class="muted">
-        Cote moyenne
-      </span>
-
-    </div>
-
   </div>
 
-  <div
-    class="card"
-    style="margin-top:15px"
-  >
-
-    <p class="muted">
-      Le bilan est calculé automatiquement
-      à partir des pronostics publiés.
+  <div class="card">
+    <p id="txtBilanDescription">
+      Le bilan est calculé automatiquement à partir des pronostics publiés.
     </p>
 
+    <p id="txtBilanBase">
+      Un pari gagné rapporte cote - 1 unité, un pari perdu représente -1 unité
+      et un pari annulé ne rapporte ni ne fait perdre d'unité.
+    </p>
   </div>
-
 </section>
 
+<!-- ================= CHAT ================= -->
 
 <section id="chat" class="page">
-
-  <h2>💬 Chat BETLEX</h2>
+  <h2 id="txtChatTitle">💬 Chat</h2>
 
   <div class="card">
 
-    <div
-      id="chatMessages"
-      class="chat-box"
-    ></div>
+    <div id="chatMessages" class="chat"></div>
 
     <input
       id="chatName"
+      type="text"
       placeholder="Ton prénom"
     >
 
     <textarea
       id="chatText"
-      placeholder="Ton message..."
+      placeholder="Écris ton message..."
     ></textarea>
 
-    <button onclick="sendMessage()">
+    <button id="sendMessage">
       Envoyer
     </button>
 
-  </div>
-
-  <div class="card">
-
-    <p class="muted">
-      Version prototype :
-      les messages sont enregistrés sur l'appareil.
+    <p class="muted" id="txtChatDescription">
+      Les messages sont enregistrés localement sur cet appareil.
     </p>
 
   </div>
-
 </section>
 
+<!-- ================= BUDGET ================= -->
 
 <section id="budget" class="page">
-
-  <h2>💰 Gestion du budget</h2>
+  <h2 id="txtBudgetTitle">💰 Gestion du budget</h2>
 
   <div class="card">
 
-    <label>Bankroll (€)</label>
+    <label id="txtBudgetBankrollLabel">
+      Bankroll disponible
+    </label>
 
     <input
       id="budgetBankroll"
       type="number"
+      min="0"
       step="0.01"
-      value="100"
+      placeholder="Exemple : 100"
     >
 
-    <label>
-      Pourcentage par pari (%)
+    <label id="txtBudgetPercentLabel">
+      Pourcentage de mise
     </label>
 
     <input
       id="budgetPercent"
       type="number"
+      min="0"
+      max="100"
       step="0.1"
-      value="2"
+      placeholder="Exemple : 2"
     >
 
-    <button onclick="calculerBudget()">
+    <button id="calculerBudget">
       Calculer
     </button>
 
-    <div
-      id="budgetResult"
-      style="margin-top:15px"
-    ></div>
-
-  </div>
-
-</section>
-
-
-<section id="contact" class="page">
-
-  <h2>ℹ️ À propos de BETLEX</h2>
-
-  <div class="card">
-
-    <h3>BETLEX</h3>
-
-    <p class="muted">
-      BETLEX propose des pronostics sportifs
-      classés par niveau de risque,
-      ainsi que des outils pour mieux gérer
-      sa bankroll.
-    </p>
+    <div id="budgetResult"></div>
 
   </div>
 
   <div class="card">
-
-    <h3>⚠️ Attention</h3>
-
-    <p class="muted">
-      Les paris sportifs comportent des risques
-      financiers. Aucun pronostic n'est garanti.
-      Jouez de manière responsable et uniquement
-      avec de l'argent que vous pouvez vous
-      permettre de perdre.
+    <p id="txtBudgetDescription">
+      Cet outil permet d'estimer une mise à partir d'un pourcentage
+      de ta bankroll.
     </p>
-
   </div>
-
-  <div class="card center">
-
-    <button onclick="ouvrirAdmin()">
-      🔐 Administration
-    </button>
-
-  </div>
-
 </section>
 
-</main>
+<!-- ================= INFOS ================= -->
 
+<section id="infos" class="page">
+  <h2 id="txtContactTitle">ℹ️ Informations</h2>
 
-<nav
-  class="bottom-nav"
-  id="bottomNav"
->
+  <div class="card">
+    <h3 id="txtAboutTitle">À propos de BETLEX</h3>
 
-<button
-  class="nav-btn active"
-  onclick="showPage('pronostics',this)"
->
+    <p id="txtAboutDescription">
+      BETLEX est une application dédiée aux pronostics sportifs.
+    </p>
+  </div>
 
-  <span class="nav-icon">🎯</span>
+  <div class="card">
+    <h3 id="txtWarningTitle">⚠️ Avertissement</h3>
 
-  Pronostics
+    <p id="txtWarningDescription">
+      Les paris sportifs comportent des risques. Aucun pronostic
+      ne garantit un résultat.
+    </p>
+  </div>
 
-</button>
+  <button id="openAdmin">
+    Administration
+  </button>
+</section>
 
+<!-- ================= NAVIGATION ================= -->
 
-<button
-  class="nav-btn"
-  onclick="showPage('montante',this)"
->
+<nav class="bottom-nav">
 
-  <span class="nav-icon">📈</span>
+  <button data-page="pronostics" class="active">
+    🎯 <span id="txtNavPronostics">Pronostics</span>
+  </button>
 
-  Montante
+  <button data-page="montante">
+    📈 <span id="txtNavMontante">Montante</span>
+  </button>
 
-</button>
+  <button data-page="bilan">
+    📊 <span id="txtNavBilan">Bilan</span>
+  </button>
 
+  <button data-page="chat">
+    💬 <span id="txtNavChat">Chat</span>
+  </button>
 
-<button
-  class="nav-btn"
-  onclick="showPage('bilan',this)"
->
+  <button data-page="budget">
+    💰 <span id="txtNavBudget">Budget</span>
+  </button>
 
-  <span class="nav-icon">📊</span>
-
-  Bilan
-
-</button>
-
-
-<button
-  class="nav-btn"
-  onclick="showPage('chat',this)"
->
-
-  <span class="nav-icon">💬</span>
-
-  Chat
-
-</button>
-
-
-<button
-  class="nav-btn"
-  onclick="showPage('budget',this)"
->
-
-  <span class="nav-icon">💰</span>
-
-  Budget
-
-</button>
-
-
-<button
-  class="nav-btn"
-  onclick="showPage('contact',this)"
->
-
-  <span class="nav-icon">ℹ️</span>
-
-  Infos
-
-</button>
+  <button data-page="infos">
+    ℹ️ <span id="txtNavInfos">Infos</span>
+  </button>
 
 </nav>
 
+<!-- ================= ADMINISTRATION ================= -->
 
-<section
-  id="adminApp"
-  class="hidden"
->
+<section id="adminApp" class="hidden">
 
-  <div class="page active">
+  <!-- CONNEXION -->
 
-    <div
-      id="adminLogin"
-      class="admin-login"
-    >
+  <div id="adminLogin" class="admin">
 
-      <div class="card">
+    <div class="card">
 
-        <h2>
-          🔐 Administration BETLEX
-        </h2>
+      <h2>🔐 Administration</h2>
 
-        <p class="muted">
-          Accès réservé à l'administrateur.
-        </p>
+      <p>
+        Connecte-toi pour gérer BETLEX.
+      </p>
 
-        <br>
+      <label>Email</label>
+      <input
+        id="adminEmail"
+        type="email"
+        placeholder="Adresse email"
+      >
 
-        <label>
-          Adresse e-mail
-        </label>
+      <label>Mot de passe</label>
+      <input
+        id="adminPassword"
+        type="password"
+        placeholder="Mot de passe"
+      >
 
-        <input
-          id="adminEmail"
-          type="email"
-          placeholder="Adresse e-mail"
-        >
+      <button id="adminLoginButton">
+        Se connecter
+      </button>
 
-        <label>
-          Mot de passe
-        </label>
+      <button
+        id="adminBackButton"
+        class="secondary"
+      >
+        Retour
+      </button>
 
-        <input
-          id="adminPassword"
-          type="password"
-          placeholder="Mot de passe"
-        >
+      <div
+        id="adminLoginError"
+        class="firebase-error hidden"
+      ></div>
 
-        <button onclick="connexionAdmin()">
-          Se connecter
-        </button>
+    </div>
 
-        <button
-          class="secondary"
-          onclick="retourSite()"
-        >
-          ← Retour au site
-        </button>
+  </div>
 
-        <p
-          id="loginMessage"
-          style="margin-top:12px"
-        ></p>
+  <!-- PANEL ADMIN -->
+
+  <div id="adminPanel" class="admin hidden">
+
+    <div class="card">
+
+      <div class="admin-header">
+
+        <div>
+          <h2>⚙️ Administration BETLEX</h2>
+          <p class="muted">
+            Connecté en tant qu'administrateur
+          </p>
+        </div>
+
+        <div>
+          <button
+            id="adminReturnButton"
+            class="secondary"
+          >
+            Retour au site
+          </button>
+
+          <button
+            id="adminLogoutButton"
+            class="danger"
+          >
+            Déconnexion
+          </button>
+        </div>
 
       </div>
 
     </div>
 
+    <!-- ================= AJOUT / MODIFICATION PRONOSTIC ================= -->
 
-    <div
-      id="adminPanel"
-      class="hidden"
-    >
+    <div class="card">
 
-      <div class="card">
+      <h2 id="adminFormTitle">
+        ➕ Ajouter un pronostic
+      </h2>
 
-        <h2>
-          ⚙️ Administration BETLEX
-        </h2>
+      <label>Catégorie</label>
 
-        <p class="muted">
-          Connecté en tant qu'administrateur.
-        </p>
+      <select id="adminCategorie">
+        <option value="safe">🟢 Safe</option>
+        <option value="semi">🟡 Semi safe</option>
+        <option value="fun">🟣 Fun</option>
+        <option value="buteur">🔴 Buteur</option>
+      </select>
+
+      <label>Match / Joueur</label>
+
+      <input
+        id="adminMatch"
+        type="text"
+        placeholder="Exemple : PSG - Marseille"
+      >
+
+      <label>Pronostic</label>
+
+      <input
+        id="adminPronostic"
+        type="text"
+        placeholder="Exemple : Victoire PSG"
+      >
+
+      <label>Cote</label>
+
+      <input
+        id="adminCote"
+        type="number"
+        min="1"
+        step="0.01"
+        placeholder="Exemple : 1.45"
+      >
+
+      <div class="form-actions">
 
         <button
-          class="secondary"
-          onclick="retourSite()"
+          id="savePronostic"
+          class="success"
         >
-          ← Retour au site
+          💾 Enregistrer
         </button>
 
         <button
-          class="danger"
-          onclick="deconnexionAdmin()"
+          id="cancelEdit"
+          class="secondary hidden"
         >
-          Se déconnecter
+          Annuler
         </button>
 
       </div>
 
+      <div
+        id="adminFormMessage"
+        class="hidden"
+      ></div>
 
-      <div class="card">
+    </div>
 
-        <h2 id="formTitle">
-          ➕ Ajouter un pronostic
-        </h2>
+    <!-- ================= LISTE PRONOSTICS ================= -->
 
-        <label>
-          Catégorie
-        </label>
+    <div class="card">
 
-        <select id="adminCategorie">
+      <h2>
+        📋 Pronostics
+      </h2>
 
-          <option value="SAFE">
-            SAFE
-          </option>
-
-          <option value="SEMI-SAFE">
-            SEMI-SAFE
-          </option>
-
-          <option value="FUN">
-            FUN
-          </option>
-
-          <option value="BUTEUR">
-            BUTEUR
-          </option>
-
-        </select>
-
-
-        <label>
-          Match / Joueur
-        </label>
-
-        <input
-          id="adminMatch"
-          placeholder="Ex : PSG - Marseille"
-        >
-
-
-        <label>
-          Pronostic
-        </label>
-
-        <input
-          id="adminPronostic"
-          placeholder="Ex : PSG gagne"
-        >
-
-
-        <label>
-          Cote
-        </label>
-
-        <input
-          id="adminCote"
-          type="number"
-          step="0.01"
-          placeholder="1.50"
-        >
-
-
-        <div class="admin-actions">
-
-          <button onclick="enregistrerPronostic()">
-            💾 Enregistrer
-          </button>
-
-          <button
-            class="secondary hidden"
-            id="cancelEdit"
-            onclick="annulerModification()"
-          >
-            Annuler
-          </button>
-
+      <div id="adminPronosticsList">
+        <div class="loading">
+          Chargement...
         </div>
+      </div>
 
+    </div>
 
-        <p
-          id="adminMessage"
-          style="margin-top:12px"
-        ></p>
+    <!-- ================= EDITEUR DE CONTENU ================= -->
+
+    <div class="card">
+
+      <h2>
+        ✏️ Éditeur du contenu
+      </h2>
+
+      <p class="muted">
+        Modifie ici les textes affichés sur les différentes rubriques
+        de BETLEX. Les modifications seront enregistrées dans Firebase
+        et visibles par tous les utilisateurs.
+      </p>
+
+      <div
+        id="contentMessage"
+        class="hidden"
+      ></div>
+
+      <!-- GENERAL -->
+
+      <div class="editor-section">
+
+        <h3>🏠 Général</h3>
+
+        <label>Titre principal</label>
+        <input id="edit_headerTitle" type="text">
+
+        <label>Sous-titre</label>
+        <textarea id="edit_headerSubtitle"></textarea>
 
       </div>
 
+      <!-- PRONOSTICS -->
 
-      <div class="card">
+      <div class="editor-section">
 
-        <h2>
-          📋 Pronostics actuels
-        </h2>
+        <h3>🎯 Pronostics</h3>
 
-        <div id="adminPronostics">
+        <label>Titre</label>
+        <input id="edit_pronosticsTitle" type="text">
 
-          <div class="loading">
-            Chargement...
-          </div>
+        <label>Message lorsqu'il n'y a aucun pronostic</label>
+        <textarea id="edit_emptyPronostics"></textarea>
 
-        </div>
+        <label>Message de chargement</label>
+        <textarea id="edit_firebaseLoading"></textarea>
 
       </div>
+
+      <!-- MONTANTE -->
+
+      <div class="editor-section">
+
+        <h3>📈 Montante</h3>
+
+        <label>Titre</label>
+        <input id="edit_montanteTitle" type="text">
+
+        <label>Libellé mise de départ</label>
+        <input id="edit_montanteMiseLabel" type="text">
+
+        <label>Libellé cote moyenne</label>
+        <input id="edit_montanteCoteLabel" type="text">
+
+        <label>Libellé nombre de paris</label>
+        <input id="edit_montanteNbLabel" type="text">
+
+        <label>Bouton</label>
+        <input id="edit_montanteButton" type="text">
+
+        <label>Description</label>
+        <textarea id="edit_montanteDescription"></textarea>
+
+        <label>Message de résultat</label>
+        <textarea id="edit_montanteResultLabel"></textarea>
+
+        <label>Message d'erreur</label>
+        <textarea id="edit_montanteValidationError"></textarea>
+
+      </div>
+
+      <!-- BILAN -->
+
+      <div class="editor-section">
+
+        <h3>📊 Bilan</h3>
+
+        <label>Titre</label>
+        <input id="edit_bilanTitle" type="text">
+
+        <label>Total</label>
+        <input id="edit_bilanTotal" type="text">
+
+        <label>Gagnés</label>
+        <input id="edit_bilanWon" type="text">
+
+        <label>Perdus</label>
+        <input id="edit_bilanLost" type="text">
+
+        <label>En attente</label>
+        <input id="edit_bilanPending" type="text">
+
+        <label>Taux de réussite</label>
+        <input id="edit_bilanWinRate" type="text">
+
+        <label>Bénéfice</label>
+        <input id="edit_bilanProfit" type="text">
+
+        <label>Cote moyenne</label>
+        <input id="edit_bilanAverageLabel" type="text">
+
+        <label>Description</label>
+        <textarea id="edit_bilanDescription"></textarea>
+
+        <label>Explication du calcul</label>
+        <textarea id="edit_bilanBase"></textarea>
+
+      </div>
+
+      <!-- CHAT -->
+
+      <div class="editor-section">
+
+        <h3>💬 Chat</h3>
+
+        <label>Titre</label>
+        <input id="edit_chatTitle" type="text">
+
+        <label>Bouton</label>
+        <input id="edit_chatButton" type="text">
+
+        <label>Placeholder prénom</label>
+        <input id="edit_chatNamePlaceholder" type="text">
+
+        <label>Placeholder message</label>
+        <input id="edit_chatTextPlaceholder" type="text">
+
+        <label>Description</label>
+        <textarea id="edit_chatDescription"></textarea>
+
+      </div>
+
+      <!-- BUDGET -->
+
+      <div class="editor-section">
+
+        <h3>💰 Budget</h3>
+
+        <label>Titre</label>
+        <input id="edit_budgetTitle" type="text">
+
+        <label>Libellé bankroll</label>
+        <input id="edit_budgetBankrollLabel" type="text">
+
+        <label>Libellé pourcentage</label>
+        <input id="edit_budgetPercentLabel" type="text">
+
+        <label>Bouton</label>
+        <input id="edit_budgetButton" type="text">
+
+        <label>Description</label>
+        <textarea id="edit_budgetDescription"></textarea>
+
+        <label>Message d'erreur</label>
+        <textarea id="edit_budgetValidationError"></textarea>
+
+      </div>
+
+      <!-- INFORMATIONS -->
+
+      <div class="editor-section">
+
+        <h3>ℹ️ Informations</h3>
+
+        <label>Titre</label>
+        <input id="edit_contactTitle" type="text">
+
+        <label>Titre À propos</label>
+        <input id="edit_aboutTitle" type="text">
+
+        <label>Description À propos</label>
+        <textarea id="edit_aboutDescription"></textarea>
+
+        <label>Titre avertissement</label>
+        <input id="edit_warningTitle" type="text">
+
+        <label>Texte avertissement</label>
+        <textarea id="edit_warningDescription"></textarea>
+
+        <label>Bouton administration</label>
+        <input id="edit_adminButton" type="text">
+
+      </div>
+
+      <!-- NAVIGATION -->
+
+      <div class="editor-section">
+
+        <h3>📱 Menu du bas</h3>
+
+        <label>Pronostics</label>
+        <input id="edit_navPronostics" type="text">
+
+        <label>Montante</label>
+        <input id="edit_navMontante" type="text">
+
+        <label>Bilan</label>
+        <input id="edit_navBilan" type="text">
+
+        <label>Chat</label>
+        <input id="edit_navChat" type="text">
+
+        <label>Budget</label>
+        <input id="edit_navBudget" type="text">
+
+        <label>Infos</label>
+        <input id="edit_navInfos" type="text">
+
+      </div>
+
+      <!-- RESULTATS -->
+
+      <div class="editor-section">
+
+        <h3>🏆 Résultats des pronostics</h3>
+
+        <label>En attente</label>
+        <input id="edit_resultPending" type="text">
+
+        <label>Gagné</label>
+        <input id="edit_resultWon" type="text">
+
+        <label>Perdu</label>
+        <input id="edit_resultLost" type="text">
+
+        <label>Annulé</label>
+        <input id="edit_resultVoid" type="text">
+
+        <label>Bouton Gagné</label>
+        <input id="edit_resultWonButton" type="text">
+
+        <label>Bouton Perdu</label>
+        <input id="edit_resultLostButton" type="text">
+
+        <label>Bouton Annulé</label>
+        <input id="edit_resultVoidButton" type="text">
+
+      </div>
+
+      <button
+        id="saveContent"
+        class="success"
+      >
+        💾 Enregistrer tous les textes
+      </button>
+
+      <button
+        id="reloadContent"
+        class="secondary"
+      >
+        🔄 Recharger les textes
+      </button>
 
     </div>
 
@@ -799,15 +1092,14 @@ hr{
 
 </section>
 
-
 <script type="module">
 
-/* =========================
-   IMPORTS FIREBASE
-========================= */
+/* =========================================================
+   FIREBASE
+========================================================= */
 
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getDatabase,
@@ -817,1057 +1109,895 @@ import {
   set,
   update,
   remove
-} from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
-} from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
-/* =========================
-   CONFIGURATION FIREBASE
-========================= */
 
 const firebaseConfig = {
+  apiKey: "AIzaSyBPFuq1xSlHn2HgsBiAqn-BprAIkzWTXio",
+  authDomain: "betlex-b2c4b.firebaseapp.com",
+  databaseURL: "https://betlex-b2c4b-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "betlex-b2c4b",
+  storageBucket: "betlex-b2c4b.firebasestorage.app",
+  messagingSenderId: "916203426560",
+  appId: "1:916203426560:web:8375461554d7921d3c99e5"
+};
 
-  apiKey:
-  "AIzaSyBPFuq1xSlHn2HgsBiAqn-BprAIkzWTXio",
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
 
-  authDomain:
-  "betlex-b2c4b.firebaseapp.com",
+const ADMIN_UID = "CAM7b0Lbg5e3y9wlDOS0dGP67eU2";
 
-  databaseURL:
-  "https://betlex-b2c4b-default-rtdb.europe-west1.firebasedatabase.app",
 
-  projectId:
-  "betlex-b2c4b",
+/* =========================================================
+   CONTENU PAR DEFAUT
+========================================================= */
 
-  storageBucket:
-  "betlex-b2c4b.firebasestorage.app",
+const DEFAULT_CONTENT = {
 
-  messagingSenderId:
-  "916203426560",
+  headerTitle: "BETLEX",
+  headerSubtitle: "Les pronostics sportifs simplement",
 
-  appId:
-  "1:916203426560:web:8375461554d7921d3c99e5"
+  pronosticsTitle: "🎯 Pronostics du jour",
+  emptyPronostics: "Aucun pronostic publié pour le moment.",
+  firebaseLoading: "Chargement des pronostics...",
 
+  montanteTitle: "📈 Montante",
+  montanteMiseLabel: "Mise de départ",
+  montanteCoteLabel: "Cote moyenne",
+  montanteNbLabel: "Nombre de paris",
+  montanteButton: "Calculer",
+  montanteDescription:
+    "La montante permet de voir l'évolution théorique d'une mise lorsqu'une partie des gains est réinvestie.",
+  montanteResultLabel:
+    "Capital final théorique :",
+  montanteValidationError:
+    "Merci de renseigner correctement tous les champs.",
+
+  bilanTitle: "📊 Bilan",
+  bilanTotal: "Total",
+  bilanWon: "Gagnés",
+  bilanLost: "Perdus",
+  bilanPending: "En attente",
+  bilanWinRate: "Taux de réussite",
+  bilanProfit: "Bénéfice",
+  bilanAverageLabel: "Cote moyenne",
+  bilanDescription:
+    "Le bilan est calculé automatiquement à partir des pronostics publiés.",
+  bilanBase:
+    "Un pari gagné rapporte cote - 1 unité, un pari perdu représente -1 unité et un pari annulé ne rapporte ni ne fait perdre d'unité.",
+
+  chatTitle: "💬 Chat",
+  chatButton: "Envoyer",
+  chatDescription:
+    "Les messages sont enregistrés localement sur cet appareil.",
+  chatNamePlaceholder: "Ton prénom",
+  chatTextPlaceholder: "Écris ton message...",
+
+  budgetTitle: "💰 Gestion du budget",
+  budgetBankrollLabel: "Bankroll disponible",
+  budgetPercentLabel: "Pourcentage de mise",
+  budgetButton: "Calculer",
+  budgetDescription:
+    "Cet outil permet d'estimer une mise à partir d'un pourcentage de ta bankroll.",
+  budgetValidationError:
+    "Merci de renseigner correctement ta bankroll et ton pourcentage.",
+
+  contactTitle: "ℹ️ Informations",
+  aboutTitle: "À propos de BETLEX",
+  aboutDescription:
+    "BETLEX est une application dédiée aux pronostics sportifs.",
+  warningTitle: "⚠️ Avertissement",
+  warningDescription:
+    "Les paris sportifs comportent des risques. Aucun pronostic ne garantit un résultat.",
+  adminButton: "Administration",
+
+  navPronostics: "Pronostics",
+  navMontante: "Montante",
+  navBilan: "Bilan",
+  navChat: "Chat",
+  navBudget: "Budget",
+  navInfos: "Infos",
+
+  resultPending: "⏳ EN ATTENTE",
+  resultWon: "🟢 GAGNÉ",
+  resultLost: "🔴 PERDU",
+  resultVoid: "⚪ ANNULÉ",
+
+  resultWonButton: "🟢 Gagné",
+  resultLostButton: "🔴 Perdu",
+  resultVoidButton: "⚪ Annulé"
 };
 
 
-/* =========================
-   INITIALISATION FIREBASE
-========================= */
-
-let app;
-let db;
-let auth;
-
-try {
-
-  app = initializeApp(firebaseConfig);
-
-  db = getDatabase(app);
-
-  auth = getAuth(app);
-
-  console.log("Firebase connecté.");
-
-} catch(error) {
-
-  console.error(
-    "Erreur initialisation Firebase :",
-    error
-  );
-
-  const errorBox =
-    document.getElementById("firebaseError");
-
-  errorBox.textContent =
-    "Erreur de connexion à Firebase.";
-
-  errorBox.classList.remove("hidden");
-
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-window.showPage = function(
-  pageId,
-  button
-){
-
-  document
-    .querySelectorAll("#publicApp .page")
-    .forEach(page => {
-
-      page.classList.remove("active");
-
-    });
-
-
-  const page =
-    document.getElementById(pageId);
-
-
-  if(page){
-
-    page.classList.add("active");
-
-  }
-
-
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(btn => {
-
-      btn.classList.remove("active");
-
-    });
-
-
-  if(button){
-
-    button.classList.add("active");
-
-  }
-
-};
-
-
-/* =========================
-   DONNÉES
-========================= */
-
+let contenuData = { ...DEFAULT_CONTENT };
 let pronosticsData = {};
-
 let editingId = null;
 
 
-/* =========================
-   CATÉGORIES
-========================= */
+/* =========================================================
+   OUTILS
+========================================================= */
 
-function afficherCategorie(
-  categorie
-){
+function escapeHtml(value) {
 
-  if(categorie === "SAFE"){
-    return "category-safe";
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(pageId) {
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  const page = document.getElementById(pageId);
+
+  if (page) {
+    page.classList.add("active");
   }
 
-  if(categorie === "SEMI-SAFE"){
-    return "category-semi";
+  document.querySelectorAll(".bottom-nav button").forEach(button => {
+    button.classList.remove("active");
+
+    if (button.dataset.page === pageId) {
+      button.classList.add("active");
+    }
+  });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+document.querySelectorAll(".bottom-nav button").forEach(button => {
+
+  button.addEventListener("click", () => {
+    showPage(button.dataset.page);
+  });
+
+});
+
+
+/* =========================================================
+   AFFICHAGE DES TEXTES
+========================================================= */
+
+function setText(id, value) {
+
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+
+function appliquerContenu(data) {
+
+  contenuData = {
+    ...DEFAULT_CONTENT,
+    ...(data || {})
+  };
+
+
+  setText("txtHeaderTitle", contenuData.headerTitle);
+  setText("txtHeaderSubtitle", contenuData.headerSubtitle);
+
+  setText("txtPronosticsTitle", contenuData.pronosticsTitle);
+  setText("txtFirebaseLoading", contenuData.firebaseLoading);
+
+  setText("txtMontanteTitle", contenuData.montanteTitle);
+  setText("txtMontanteMiseLabel", contenuData.montanteMiseLabel);
+  setText("txtMontanteCoteLabel", contenuData.montanteCoteLabel);
+  setText("txtMontanteNbLabel", contenuData.montanteNbLabel);
+  setText("calculerMontante", contenuData.montanteButton);
+  setText("txtMontanteDescription", contenuData.montanteDescription);
+
+  setText("txtBilanTitle", contenuData.bilanTitle);
+  setText("txtBilanTotal", contenuData.bilanTotal);
+  setText("txtBilanWon", contenuData.bilanWon);
+  setText("txtBilanLost", contenuData.bilanLost);
+  setText("txtBilanPending", contenuData.bilanPending);
+  setText("txtBilanWinRate", contenuData.bilanWinRate);
+  setText("txtBilanProfit", contenuData.bilanProfit);
+  setText("txtBilanAverageLabel", contenuData.bilanAverageLabel);
+  setText("txtBilanDescription", contenuData.bilanDescription);
+  setText("txtBilanBase", contenuData.bilanBase);
+
+  setText("txtChatTitle", contenuData.chatTitle);
+  setText("sendMessage", contenuData.chatButton);
+  setText("txtChatDescription", contenuData.chatDescription);
+
+  const chatName = document.getElementById("chatName");
+  const chatText = document.getElementById("chatText");
+
+  if (chatName) {
+    chatName.placeholder = contenuData.chatNamePlaceholder;
   }
 
-  if(categorie === "FUN"){
-    return "category-fun";
+  if (chatText) {
+    chatText.placeholder = contenuData.chatTextPlaceholder;
   }
 
-  if(categorie === "BUTEUR"){
-    return "category-buteur";
-  }
+  setText("txtBudgetTitle", contenuData.budgetTitle);
+  setText("txtBudgetBankrollLabel", contenuData.budgetBankrollLabel);
+  setText("txtBudgetPercentLabel", contenuData.budgetPercentLabel);
+  setText("calculerBudget", contenuData.budgetButton);
+  setText("txtBudgetDescription", contenuData.budgetDescription);
 
-  return "";
+  setText("txtContactTitle", contenuData.contactTitle);
+  setText("txtAboutTitle", contenuData.aboutTitle);
+  setText("txtAboutDescription", contenuData.aboutDescription);
+  setText("txtWarningTitle", contenuData.warningTitle);
+  setText("txtWarningDescription", contenuData.warningDescription);
+  setText("openAdmin", contenuData.adminButton);
+
+  setText("txtNavPronostics", contenuData.navPronostics);
+  setText("txtNavMontante", contenuData.navMontante);
+  setText("txtNavBilan", contenuData.navBilan);
+  setText("txtNavChat", contenuData.navChat);
+  setText("txtNavBudget", contenuData.navBudget);
+  setText("txtNavInfos", contenuData.navInfos);
+
+  if (pronosticsData) {
+    afficherPronostics(pronosticsData);
+  }
 
 }
 
 
-/* =========================
-   AFFICHAGE PUBLIC
-========================= */
+/* =========================================================
+   CHARGEMENT DU CONTENU FIREBASE
+========================================================= */
 
-function afficherPronostics(
-  data
-){
+function chargerContenu() {
 
-  pronosticsData =
-    data || {};
+  const contentRef = ref(db, "content");
+
+  onValue(
+    contentRef,
+    snapshot => {
+
+      const data = snapshot.val() || {};
+
+      appliquerContenu(data);
+
+      if (
+        auth.currentUser &&
+        auth.currentUser.uid === ADMIN_UID
+      ) {
+        chargerEditeurContenu();
+      }
+
+    },
+    error => {
+      console.error("Erreur contenu :", error);
+    }
+  );
+}
 
 
-  const container =
-    document.getElementById(
-      "publicPronostics"
-    );
+/* =========================================================
+   PRONOSTICS PUBLICS
+========================================================= */
+
+function afficherCategorie(categorie) {
+
+  const noms = {
+    safe: "🟢 SAFE",
+    semi: "🟡 SEMI SAFE",
+    fun: "🟣 FUN",
+    buteur: "🔴 BUTEUR"
+  };
+
+  return noms[categorie] || categorie;
+}
+
+
+function getResultInfo(resultat) {
+
+  const result = resultat || "pending";
+
+  const infos = {
+
+    pending: {
+      text: contenuData.resultPending,
+      className: "result-pending"
+    },
+
+    won: {
+      text: contenuData.resultWon,
+      className: "result-won"
+    },
+
+    lost: {
+      text: contenuData.resultLost,
+      className: "result-lost"
+    },
+
+    void: {
+      text: contenuData.resultVoid,
+      className: "result-void"
+    }
+
+  };
+
+  return infos[result] || infos.pending;
+}
+
+
+function afficherPronostics(data) {
+
+  pronosticsData = data || {};
+
+  const container = document.getElementById("publicPronostics");
+
+  if (!container) return;
+
+  const entries = Object.entries(pronosticsData)
+    .sort((a, b) => {
+      return (b[1].date || 0) - (a[1].date || 0);
+    });
+
+  if (entries.length === 0) {
+
+    container.innerHTML = `
+      <div class="card empty">
+        ${escapeHtml(contenuData.emptyPronostics)}
+      </div>
+    `;
+
+    mettreAJourBilan();
+
+    return;
+  }
 
 
   container.innerHTML = "";
 
+  entries.forEach(([id, p]) => {
 
-  const liste =
-    Object.entries(
-      pronosticsData
-    );
+    const resultInfo = getResultInfo(p.resultat);
 
+    const date = p.date
+      ? new Date(p.date).toLocaleString("fr-FR")
+      : "";
 
-  if(liste.length === 0){
+    const card = document.createElement("div");
 
-    container.innerHTML = `
+    card.className = "card prono-card";
 
-      <div class="card empty">
+    card.innerHTML = `
 
-        Aucun pronostic publié
-        pour le moment.
+      <div>
+        <span class="badge badge-${escapeHtml(p.categorie || "safe")}">
+          ${escapeHtml(afficherCategorie(p.categorie))}
+        </span>
 
+        <span class="result-badge ${resultInfo.className}">
+          ${escapeHtml(resultInfo.text)}
+        </span>
+      </div>
+
+      <div class="prono-date">
+        ${escapeHtml(date)}
+      </div>
+
+      <h3>
+        ${escapeHtml(p.match)}
+      </h3>
+
+      <p>
+        <strong>
+          ${escapeHtml(p.pronostic)}
+        </strong>
+      </p>
+
+      <div class="cote">
+        Cote : ${escapeHtml(p.cote)}
       </div>
 
     `;
 
-    mettreAJourBilan([]);
+    container.appendChild(card);
 
-    return;
+  });
 
-  }
-
-
-  liste.reverse();
-
-
-  const pronostics = [];
-
-
-  liste.forEach(
-    ([id,p]) => {
-
-      if(!p) return;
-
-
-      const categorie =
-        p.categorie || "SAFE";
-
-
-      const match =
-        p.match ||
-        "Match non renseigné";
-
-
-      const pronostic =
-        p.pronostic ||
-        "Pronostic non renseigné";
-
-
-      const cote =
-        Number(p.cote || 0);
-
-
-      pronostics.push(p);
-
-
-      const date =
-        p.date
-        ? new Date(p.date)
-            .toLocaleDateString("fr-FR")
-        : "";
-
-
-      const card =
-        document.createElement("div");
-
-
-      card.className =
-        "card prono-card";
-
-
-      card.innerHTML = `
-
-        <div class="prono-top">
-
-          <span
-            class="badge ${afficherCategorie(categorie)}"
-          >
-
-            ${escapeHtml(categorie)}
-
-          </span>
-
-          <span class="small">
-
-            ${escapeHtml(date)}
-
-          </span>
-
-        </div>
-
-
-        <h3>
-          ${escapeHtml(match)}
-        </h3>
-
-
-        <div class="prono-pick">
-
-          ${escapeHtml(pronostic)}
-
-        </div>
-
-
-        <div class="cote">
-
-          Cote
-          ${cote
-            ? cote.toFixed(2)
-            : "—"}
-
-        </div>
-
-      `;
-
-
-      container.appendChild(card);
-
-    }
-  );
-
-
-  mettreAJourBilan(
-    pronostics
-  );
-
+  mettreAJourBilan();
 }
 
 
-/* =========================
+/* =========================================================
+   CHARGEMENT PRONOSTICS
+========================================================= */
+
+function chargerPronostics() {
+
+  const pronosticsRef = ref(db, "pronostics");
+
+  onValue(
+    pronosticsRef,
+    snapshot => {
+
+      pronosticsData = snapshot.val() || {};
+
+      afficherPronostics(pronosticsData);
+      afficherAdminPronostics(pronosticsData);
+
+    },
+    error => {
+
+      console.error(error);
+
+      const errorBox =
+        document.getElementById("firebaseError");
+
+      if (errorBox) {
+
+        errorBox.classList.remove("hidden");
+
+        errorBox.textContent =
+          "Impossible de charger les pronostics. Vérifie les règles Firebase.";
+
+      }
+
+    }
+  );
+}
+
+
+/* =========================================================
    BILAN
-========================= */
+========================================================= */
 
-function mettreAJourBilan(
-  liste
-){
+function mettreAJourBilan() {
 
-  document.getElementById(
-    "statTotal"
-  ).textContent =
-    liste.length;
+  const entries = Object.values(pronosticsData || {});
 
+  let total = entries.length;
+  let won = 0;
+  let lost = 0;
+  let pending = 0;
+  let profit = 0;
+  let coteTotal = 0;
+  let coteCount = 0;
 
-  if(liste.length === 0){
+  entries.forEach(p => {
 
-    document.getElementById(
-      "statCote"
-    ).textContent =
-      "0.00";
+    const resultat = p.resultat || "pending";
+    const cote = parseFloat(p.cote);
 
-    return;
+    if (!isNaN(cote)) {
+      coteTotal += cote;
+      coteCount++;
+    }
 
-  }
+    if (resultat === "won") {
 
+      won++;
 
-  let total = 0;
+      if (!isNaN(cote)) {
+        profit += cote - 1;
+      }
 
-  let nombre = 0;
+    } else if (resultat === "lost") {
 
+      lost++;
+      profit -= 1;
 
-  liste.forEach(p => {
+    } else if (resultat === "void") {
 
-    const cote =
-      Number(p.cote);
+      // Aucun impact
 
+    } else {
 
-    if(
-      !isNaN(cote)
-      &&
-      cote > 0
-    ){
-
-      total += cote;
-
-      nombre++;
+      pending++;
 
     }
 
   });
 
 
-  const moyenne =
-    nombre
-    ? total / nombre
+  const resolved = won + lost;
+
+  const winRate = resolved > 0
+    ? (won / resolved) * 100
+    : 0;
+
+  const averageCote = coteCount > 0
+    ? coteTotal / coteCount
     : 0;
 
 
-  document.getElementById(
-    "statCote"
-  ).textContent =
-    moyenne.toFixed(2);
-
+  setText("statTotal", total);
+  setText("statWon", won);
+  setText("statLost", lost);
+  setText("statPending", pending);
+  setText("statWinRate", winRate.toFixed(1) + "%");
+  setText("statProfit", profit.toFixed(2) + " u");
+  setText("statCote", averageCote.toFixed(2));
 }
 
 
-/* =========================
-   CHARGEMENT FIREBASE
-========================= */
+/* =========================================================
+   ADMINISTRATION
+========================================================= */
 
-function chargerPronostics(){
-
-  if(!db){
-
-    return;
-
-  }
+const adminApp = document.getElementById("adminApp");
+const adminLogin = document.getElementById("adminLogin");
+const adminPanel = document.getElementById("adminPanel");
 
 
-  const pronosticsRef =
-    ref(
-      db,
-      "pronostics"
-    );
+document.getElementById("openAdmin")
+  .addEventListener("click", () => {
+
+    adminApp.classList.remove("hidden");
+
+    document.body.scrollTop = 0;
+
+    window.scrollTo(0, 0);
+  });
 
 
-  onValue(
+document.getElementById("adminBackButton")
+  .addEventListener("click", () => {
 
-    pronosticsRef,
+    adminApp.classList.add("hidden");
 
-    snapshot => {
-
-      const data =
-        snapshot.val();
+  });
 
 
-      afficherPronostics(
-        data
+document.getElementById("adminReturnButton")
+  .addEventListener("click", () => {
+
+    adminApp.classList.add("hidden");
+
+  });
+
+
+document.getElementById("adminLoginButton")
+  .addEventListener("click", async () => {
+
+    const email =
+      document.getElementById("adminEmail").value.trim();
+
+    const password =
+      document.getElementById("adminPassword").value;
+
+    const errorBox =
+      document.getElementById("adminLoginError");
+
+    errorBox.classList.add("hidden");
+
+    try {
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
       );
 
+    } catch (error) {
 
-      afficherAdminPronostics(
-        data
-      );
-
-
-      document
-        .getElementById(
-          "firebaseError"
-        )
-        .classList
-        .add("hidden");
-
-    },
-
-    error => {
-
-      console.error(
-        "Firebase :",
-        error
-      );
-
-
-      document.getElementById(
-        "publicPronostics"
-      ).innerHTML = `
-
-        <div class="card">
-
-          <p class="error">
-
-            Impossible de charger
-            les pronostics.
-
-          </p>
-
-          <p
-            class="muted"
-            style="margin-top:8px"
-          >
-
-            Vérifie les règles de sécurité
-            Firebase Realtime Database.
-
-          </p>
-
-        </div>
-
-      `;
-
-
-      const errorBox =
-        document.getElementById(
-          "firebaseError"
-        );
-
+      console.error(error);
 
       errorBox.textContent =
-        "Firebase : accès aux pronostics refusé.";
+        "Connexion impossible. Vérifie ton email et ton mot de passe.";
 
-
-      errorBox.classList.remove(
-        "hidden"
-      );
+      errorBox.classList.remove("hidden");
 
     }
 
-  );
-
-}
+  });
 
 
-/* =========================
-   OUVRIR ADMINISTRATION
-========================= */
-
-window.ouvrirAdmin =
-function(){
-
-  document
-    .getElementById("publicApp")
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById("bottomNav")
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById("mainHeader")
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById("adminApp")
-    .classList
-    .remove("hidden");
-
-};
-
-
-/* =========================
-   RETOUR SITE
-========================= */
-
-window.retourSite =
-function(){
-
-  document
-    .getElementById("adminApp")
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById("publicApp")
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById("bottomNav")
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById("mainHeader")
-    .classList
-    .remove("hidden");
-
-};
-
-
-/* =========================
-   CONNEXION ADMIN
-========================= */
-
-window.connexionAdmin =
-async function(){
-
-  if(!auth){
-
-    document.getElementById(
-      "loginMessage"
-    ).textContent =
-      "Firebase n'est pas disponible.";
-
-    return;
-
-  }
-
-
-  const email =
-    document
-      .getElementById(
-        "adminEmail"
-      )
-      .value
-      .trim();
-
-
-  const password =
-    document
-      .getElementById(
-        "adminPassword"
-      )
-      .value;
-
-
-  const message =
-    document.getElementById(
-      "loginMessage"
-    );
-
-
-  message.className =
-    "muted";
-
-
-  message.textContent =
-    "Connexion...";
-
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-
-    message.textContent =
-      "";
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-
-    message.className =
-      "error";
-
-
-    message.textContent =
-      "Connexion impossible. Vérifie ton e-mail et ton mot de passe.";
-
-  }
-
-};
-
-
-/* =========================
-   DÉCONNEXION
-========================= */
-
-window.deconnexionAdmin =
-async function(){
-
-  if(!auth) return;
-
-
-  try{
+document.getElementById("adminLogoutButton")
+  .addEventListener("click", async () => {
 
     await signOut(auth);
 
+  });
+
+
+onAuthStateChanged(auth, user => {
+
+  if (
+    user &&
+    user.uid === ADMIN_UID
+  ) {
+
+    adminLogin.classList.add("hidden");
+    adminPanel.classList.remove("hidden");
+
+    chargerEditeurContenu();
+
+  } else {
+
+    adminLogin.classList.remove("hidden");
+    adminPanel.classList.add("hidden");
+
   }
 
-  catch(error){
-
-    console.error(error);
-
-  }
-
-};
+});
 
 
-/* =========================
-   ÉTAT ADMIN
-========================= */
+/* =========================================================
+   ENREGISTRER PRONOSTIC
+========================================================= */
 
-if(auth){
-
-  onAuthStateChanged(
-    auth,
-    user => {
-
-      const login =
-        document.getElementById(
-          "adminLogin"
-        );
+document.getElementById("savePronostic")
+  .addEventListener("click", enregistrerPronostic);
 
 
-      const panel =
-        document.getElementById(
-          "adminPanel"
-        );
+async function enregistrerPronostic() {
 
+  if (
+    !auth.currentUser ||
+    auth.currentUser.uid !== ADMIN_UID
+  ) {
 
-      if(user){
-
-        login
-          .classList
-          .add("hidden");
-
-
-        panel
-          .classList
-          .remove("hidden");
-
-
-        afficherAdminPronostics(
-          pronosticsData
-        );
-
-      }
-
-      else{
-
-        login
-          .classList
-          .remove("hidden");
-
-
-        panel
-          .classList
-          .add("hidden");
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================
-   AJOUT PRONOSTIC
-========================= */
-
-window.enregistrerPronostic =
-async function(){
-
-  if(!auth || !auth.currentUser){
-
-    document.getElementById(
-      "adminMessage"
-    ).textContent =
-      "Tu dois être connecté.";
+    alert("Accès administrateur requis.");
 
     return;
-
   }
 
 
   const categorie =
-    document
-      .getElementById(
-        "adminCategorie"
-      )
-      .value;
-
+    document.getElementById("adminCategorie").value;
 
   const match =
-    document
-      .getElementById(
-        "adminMatch"
-      )
-      .value
-      .trim();
-
+    document.getElementById("adminMatch").value.trim();
 
   const pronostic =
-    document
-      .getElementById(
-        "adminPronostic"
-      )
-      .value
-      .trim();
-
+    document.getElementById("adminPronostic").value.trim();
 
   const cote =
-    Number(
-      document
-        .getElementById(
-          "adminCote"
-        )
-        .value
-    );
+    parseFloat(document.getElementById("adminCote").value);
 
 
-  const message =
-    document.getElementById(
-      "adminMessage"
-    );
-
-
-  if(
+  if (
     !match ||
     !pronostic ||
-    !cote
-  ){
+    isNaN(cote) ||
+    cote < 1
+  ) {
 
-    message.className =
-      "error";
-
-
-    message.textContent =
-      "Remplis tous les champs.";
+    afficherMessageForm(
+      "Merci de renseigner tous les champs correctement.",
+      "error"
+    );
 
     return;
-
   }
 
 
-  const donnees = {
+  try {
 
-    categorie:
-      categorie,
+    if (editingId) {
 
-    match:
-      match,
-
-    pronostic:
-      pronostic,
-
-    cote:
-      cote,
-
-    date:
-      Date.now()
-
-  };
-
-
-  try{
-
-    if(editingId){
+      /*
+        IMPORTANT :
+        On ne modifie que les informations du pronostic.
+        La date et le résultat sont conservés.
+      */
 
       await update(
-
-        ref(
-          db,
-          "pronostics/" +
-          editingId
-        ),
-
-        donnees
-
+        ref(db, "pronostics/" + editingId),
+        {
+          categorie,
+          match,
+          pronostic,
+          cote
+        }
       );
 
+      afficherMessageForm(
+        "Pronostic modifié avec succès.",
+        "success"
+      );
 
-      message.className =
-        "success";
+    } else {
 
-
-      message.textContent =
-        "Pronostic modifié !";
-
-
-      editingId =
-        null;
-
-
-      document.getElementById(
-        "formTitle"
-      ).textContent =
-        "➕ Ajouter un pronostic";
-
-
-      document.getElementById(
-        "cancelEdit"
-      )
-      .classList
-      .add("hidden");
-
-    }
-
-    else{
-
-      const nouveau =
-        push(
-          ref(
-            db,
-            "pronostics"
-          )
-        );
-
+      const nouveau = push(
+        ref(db, "pronostics")
+      );
 
       await set(
         nouveau,
-        donnees
+        {
+          categorie,
+          match,
+          pronostic,
+          cote,
+          date: Date.now(),
+          resultat: "pending"
+        }
       );
 
-
-      message.className =
-        "success";
-
-
-      message.textContent =
-        "Pronostic publié !";
-
+      afficherMessageForm(
+        "Pronostic publié avec succès.",
+        "success"
+      );
     }
-
 
     viderFormulaire();
 
-  }
-
-  catch(error){
+  } catch (error) {
 
     console.error(error);
 
-
-    message.className =
-      "error";
-
-
-    message.textContent =
-      "Erreur Firebase : impossible d'enregistrer.";
+    afficherMessageForm(
+      "Erreur lors de l'enregistrement.",
+      "error"
+    );
 
   }
 
-};
+}
 
 
-/* =========================
-   MODIFIER
-========================= */
+function afficherMessageForm(message, type) {
 
-window.modifierPronostic =
-function(id){
+  const box =
+    document.getElementById("adminFormMessage");
 
-  const p =
-    pronosticsData[id];
+  box.textContent = message;
 
+  box.className =
+    type === "success"
+      ? "content-success"
+      : "content-error";
 
-  if(!p) return;
-
-
-  editingId =
-    id;
+}
 
 
-  document.getElementById(
-    "adminCategorie"
-  ).value =
-    p.categorie ||
-    "SAFE";
+/* =========================================================
+   MODIFIER PRONOSTIC
+========================================================= */
 
+window.modifierPronostic = function(id) {
 
-  document.getElementById(
-    "adminMatch"
-  ).value =
-    p.match ||
-    "";
+  const p = pronosticsData[id];
 
+  if (!p) return;
 
-  document.getElementById(
-    "adminPronostic"
-  ).value =
-    p.pronostic ||
-    "";
+  editingId = id;
 
+  document.getElementById("adminCategorie").value =
+    p.categorie || "safe";
 
-  document.getElementById(
-    "adminCote"
-  ).value =
-    p.cote ||
-    "";
+  document.getElementById("adminMatch").value =
+    p.match || "";
 
+  document.getElementById("adminPronostic").value =
+    p.pronostic || "";
 
-  document.getElementById(
-    "formTitle"
-  ).textContent =
+  document.getElementById("adminCote").value =
+    p.cote || "";
+
+  document.getElementById("adminFormTitle").textContent =
     "✏️ Modifier le pronostic";
 
+  document.getElementById("savePronostic").textContent =
+    "💾 Enregistrer les modifications";
 
-  document.getElementById(
-    "cancelEdit"
-  )
-  .classList
-  .remove("hidden");
-
+  document.getElementById("cancelEdit")
+    .classList.remove("hidden");
 
   window.scrollTo({
-    top:0,
-    behavior:"smooth"
+    top: 0,
+    behavior: "smooth"
   });
 
 };
 
 
-/* =========================
-   ANNULER
-========================= */
+/* =========================================================
+   ANNULER MODIFICATION
+========================================================= */
 
-window.annulerModification =
-function(){
+document.getElementById("cancelEdit")
+  .addEventListener("click", annulerModification);
 
-  editingId =
-    null;
 
+function annulerModification() {
+
+  editingId = null;
+
+  document.getElementById("adminFormTitle").textContent =
+    "➕ Ajouter un pronostic";
+
+  document.getElementById("savePronostic").textContent =
+    "💾 Enregistrer";
+
+  document.getElementById("cancelEdit")
+    .classList.add("hidden");
 
   viderFormulaire();
 
+}
 
-  document.getElementById(
-    "formTitle"
-  ).textContent =
+
+/* =========================================================
+   VIDER FORMULAIRE
+========================================================= */
+
+function viderFormulaire() {
+
+  document.getElementById("adminMatch").value = "";
+  document.getElementById("adminPronostic").value = "";
+  document.getElementById("adminCote").value = "";
+
+  editingId = null;
+
+  document.getElementById("adminFormTitle").textContent =
     "➕ Ajouter un pronostic";
 
+  document.getElementById("savePronostic").textContent =
+    "💾 Enregistrer";
 
-  document.getElementById(
-    "cancelEdit"
-  )
-  .classList
-  .add("hidden");
+  document.getElementById("cancelEdit")
+    .classList.add("hidden");
 
-};
+}
 
 
-/* =========================
-   SUPPRIMER
-========================= */
+/* =========================================================
+   SUPPRIMER PRONOSTIC
+========================================================= */
 
-window.supprimerPronostic =
-async function(id){
+window.supprimerPronostic = async function(id) {
 
-  if(
-    !auth ||
-    !auth.currentUser
-  ){
+  if (
+    !auth.currentUser ||
+    auth.currentUser.uid !== ADMIN_UID
+  ) {
+
+    alert("Accès administrateur requis.");
 
     return;
-
   }
 
 
-  const confirmation =
-    confirm(
-      "Supprimer ce pronostic ?"
-    );
-
-
-  if(!confirmation){
-
+  if (
+    !confirm(
+      "Veux-tu vraiment supprimer ce pronostic ?"
+    )
+  ) {
     return;
-
   }
 
 
-  try{
+  try {
 
     await remove(
-      ref(
-        db,
-        "pronostics/" +
-        id
-      )
+      ref(db, "pronostics/" + id)
     );
 
-  }
-
-  catch(error){
+  } catch (error) {
 
     console.error(error);
-
 
     alert(
       "Impossible de supprimer le pronostic."
@@ -1878,495 +2008,614 @@ async function(id){
 };
 
 
-/* =========================
-   VIDER FORMULAIRE
-========================= */
+/* =========================================================
+   CHANGER RESULTAT
+========================================================= */
 
-function viderFormulaire(){
+window.changerResultat = async function(
+  id,
+  resultat
+) {
 
-  document.getElementById(
-    "adminMatch"
-  ).value = "";
+  if (
+    !auth.currentUser ||
+    auth.currentUser.uid !== ADMIN_UID
+  ) {
 
-
-  document.getElementById(
-    "adminPronostic"
-  ).value = "";
-
-
-  document.getElementById(
-    "adminCote"
-  ).value = "";
-
-}
-
-
-/* =========================
-   LISTE ADMIN
-========================= */
-
-function afficherAdminPronostics(
-  data
-){
-
-  const container =
-    document.getElementById(
-      "adminPronostics"
-    );
-
-
-  if(!container){
+    alert("Accès administrateur requis.");
 
     return;
-
   }
 
 
-  container.innerHTML = "";
+  try {
 
-
-  const liste =
-    Object.entries(
-      data || {}
+    await update(
+      ref(db, "pronostics/" + id),
+      {
+        resultat: resultat,
+        resultatDate: Date.now()
+      }
     );
 
+  } catch (error) {
 
-  if(liste.length === 0){
+    console.error(error);
+
+    alert(
+      "Impossible de modifier le résultat."
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   AFFICHER PRONOSTICS ADMIN
+========================================================= */
+
+function afficherAdminPronostics(data) {
+
+  const container =
+    document.getElementById("adminPronosticsList");
+
+  if (!container) return;
+
+
+  const entries = Object.entries(data || {})
+    .sort((a, b) => {
+      return (b[1].date || 0) - (a[1].date || 0);
+    });
+
+
+  if (entries.length === 0) {
 
     container.innerHTML = `
-
       <div class="empty">
         Aucun pronostic.
       </div>
-
     `;
 
     return;
-
   }
-
-
-  liste.reverse();
-
-
-  liste.forEach(
-    ([id,p]) => {
-
-      if(!p) return;
-
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-
-      item.className =
-        "admin-item";
-
-
-      item.innerHTML = `
-
-        <strong>
-          ${escapeHtml(
-            p.match || ""
-          )}
-        </strong>
-
-
-        <p class="muted">
-
-          ${escapeHtml(
-            p.pronostic || ""
-          )}
-
-          · Cote
-
-          ${Number(
-            p.cote || 0
-          ).toFixed(2)}
-
-        </p>
-
-
-        <div
-          class="admin-item-buttons"
-        >
-
-          <button
-            onclick="modifierPronostic('${id}')"
-          >
-
-            ✏️ Modifier
-
-          </button>
-
-
-          <button
-            class="danger"
-            onclick="supprimerPronostic('${id}')"
-          >
-
-            🗑️ Supprimer
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      container.appendChild(
-        item
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================
-   MONTANTE
-========================= */
-
-window.calculerMontante =
-function(){
-
-  const mise =
-    Number(
-      document.getElementById(
-        "montanteMise"
-      ).value
-    );
-
-
-  const cote =
-    Number(
-      document.getElementById(
-        "montanteCote"
-      ).value
-    );
-
-
-  const nb =
-    Number(
-      document.getElementById(
-        "montanteNb"
-      ).value
-    );
-
-
-  if(
-    mise <= 0 ||
-    cote <= 0 ||
-    nb <= 0
-  ){
-
-    document.getElementById(
-      "montanteResult"
-    ).innerHTML = `
-
-      <p class="error">
-        Vérifie les valeurs.
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  const resultat =
-    mise *
-    Math.pow(
-      cote,
-      nb
-    );
-
-
-  document.getElementById(
-    "montanteResult"
-  ).innerHTML = `
-
-    <div class="card">
-
-      <p class="muted">
-        Capital final théorique
-      </p>
-
-      <strong style="font-size:28px">
-
-        ${resultat.toFixed(2)} €
-
-      </strong>
-
-    </div>
-
-  `;
-
-};
-
-
-/* =========================
-   BUDGET
-========================= */
-
-window.calculerBudget =
-function(){
-
-  const bankroll =
-    Number(
-      document.getElementById(
-        "budgetBankroll"
-      ).value
-    );
-
-
-  const percent =
-    Number(
-      document.getElementById(
-        "budgetPercent"
-      ).value
-    );
-
-
-  if(
-    bankroll <= 0 ||
-    percent <= 0
-  ){
-
-    document.getElementById(
-      "budgetResult"
-    ).innerHTML = `
-
-      <p class="error">
-        Vérifie les valeurs.
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  const mise =
-    bankroll *
-    percent /
-    100;
-
-
-  document.getElementById(
-    "budgetResult"
-  ).innerHTML = `
-
-    <div class="card">
-
-      <p class="muted">
-        Mise selon ton pourcentage
-      </p>
-
-      <strong style="font-size:28px">
-
-        ${mise.toFixed(2)} €
-
-      </strong>
-
-    </div>
-
-  `;
-
-};
-
-
-/* =========================
-   CHAT LOCAL
-========================= */
-
-function chargerChat(){
-
-  const messages =
-    JSON.parse(
-      localStorage.getItem(
-        "betlexChat"
-      ) || "[]"
-    );
-
-
-  const container =
-    document.getElementById(
-      "chatMessages"
-    );
-
-
-  if(!container) return;
 
 
   container.innerHTML = "";
 
 
-  messages.forEach(
-    m => {
+  entries.forEach(([id, p]) => {
 
-      const div =
-        document.createElement(
-          "div"
-        );
+    const result =
+      p.resultat || "pending";
+
+    const resultInfo =
+      getResultInfo(result);
+
+    const date = p.date
+      ? new Date(p.date).toLocaleString("fr-FR")
+      : "";
 
 
-      div.className =
-        "message";
+    const item =
+      document.createElement("div");
+
+    item.className = "admin-item";
 
 
-      div.innerHTML = `
+    item.innerHTML = `
 
-        <strong>
-          ${escapeHtml(m.name)}
-        </strong>
+      <div>
 
-        <p>
-          ${escapeHtml(m.text)}
-        </p>
-
-        <span class="small">
-          ${escapeHtml(m.date)}
+        <span class="badge badge-${escapeHtml(p.categorie || "safe")}">
+          ${escapeHtml(afficherCategorie(p.categorie))}
         </span>
 
-      `;
+        <span class="result-badge ${resultInfo.className}">
+          ${escapeHtml(resultInfo.text)}
+        </span>
 
+      </div>
 
-      container.appendChild(
-        div
-      );
+      <small>
+        ${escapeHtml(date)}
+      </small>
 
-    }
-  );
+      <h3>
+        ${escapeHtml(p.match)}
+      </h3>
+
+      <p>
+        <strong>
+          ${escapeHtml(p.pronostic)}
+        </strong>
+      </p>
+
+      <p>
+        Cote :
+        <strong>
+          ${escapeHtml(p.cote)}
+        </strong>
+      </p>
+
+      <div class="admin-buttons">
+
+        <button
+          class="success"
+          onclick="changerResultat('${id}', 'won')"
+        >
+          ${escapeHtml(contenuData.resultWonButton)}
+        </button>
+
+        <button
+          class="danger"
+          onclick="changerResultat('${id}', 'lost')"
+        >
+          ${escapeHtml(contenuData.resultLostButton)}
+        </button>
+
+        <button
+          class="secondary"
+          onclick="changerResultat('${id}', 'void')"
+        >
+          ${escapeHtml(contenuData.resultVoidButton)}
+        </button>
+
+        <button
+          class="warning"
+          onclick="changerResultat('${id}', 'pending')"
+        >
+          ⏳ En attente
+        </button>
+
+        <button
+          class="info"
+          onclick="modifierPronostic('${id}')"
+        >
+          ✏️ Modifier
+        </button>
+
+        <button
+          class="danger"
+          onclick="supprimerPronostic('${id}')"
+        >
+          🗑️ Supprimer
+        </button>
+
+      </div>
+    `;
+
+    container.appendChild(item);
+
+  });
 
 }
 
 
-/* =========================
-   ENVOYER MESSAGE
-========================= */
+/* =========================================================
+   MONTANTE
+========================================================= */
 
-window.sendMessage =
-function(){
+document.getElementById("calculerMontante")
+  .addEventListener("click", () => {
 
-  const name =
-    document.getElementById(
-      "chatName"
-    ).value.trim();
+    const mise =
+      parseFloat(
+        document.getElementById("montanteMise").value
+      );
 
+    const cote =
+      parseFloat(
+        document.getElementById("montanteCote").value
+      );
 
-  const text =
-    document.getElementById(
-      "chatText"
-    ).value.trim();
-
-
-  if(
-    !name ||
-    !text
-  ){
-
-    alert(
-      "Remplis ton prénom et ton message."
-    );
-
-    return;
-
-  }
+    const nb =
+      parseInt(
+        document.getElementById("montanteNb").value
+      );
 
 
-  const messages =
-    JSON.parse(
-      localStorage.getItem(
-        "betlexChat"
-      ) || "[]"
-    );
+    const result =
+      document.getElementById("montanteResult");
 
 
-  messages.push({
+    if (
+      isNaN(mise) ||
+      isNaN(cote) ||
+      isNaN(nb) ||
+      mise <= 0 ||
+      cote < 1 ||
+      nb <= 0
+    ) {
 
-    name:
-      name,
+      result.innerHTML = `
+        <div class="content-error">
+          ${escapeHtml(contenuData.montanteValidationError)}
+        </div>
+      `;
 
-    text:
-      text,
+      return;
+    }
 
-    date:
-      new Date()
-        .toLocaleString(
-          "fr-FR"
-        )
+
+    const capitalFinal =
+      mise * Math.pow(cote, nb);
+
+
+    result.innerHTML = `
+      <div class="card">
+        <strong>
+          ${escapeHtml(contenuData.montanteResultLabel)}
+        </strong>
+
+        <div class="cote">
+          ${capitalFinal.toFixed(2)} €
+        </div>
+      </div>
+    `;
 
   });
 
 
-  localStorage.setItem(
-    "betlexChat",
-    JSON.stringify(
-      messages
-    )
-  );
+/* =========================================================
+   BUDGET
+========================================================= */
+
+document.getElementById("calculerBudget")
+  .addEventListener("click", () => {
+
+    const bankroll =
+      parseFloat(
+        document.getElementById("budgetBankroll").value
+      );
+
+    const percent =
+      parseFloat(
+        document.getElementById("budgetPercent").value
+      );
 
 
-  document.getElementById(
-    "chatText"
-  ).value = "";
+    const result =
+      document.getElementById("budgetResult");
 
 
-  chargerChat();
+    if (
+      isNaN(bankroll) ||
+      isNaN(percent) ||
+      bankroll <= 0 ||
+      percent <= 0 ||
+      percent > 100
+    ) {
 
-};
+      result.innerHTML = `
+        <div class="content-error">
+          ${escapeHtml(contenuData.budgetValidationError)}
+        </div>
+      `;
+
+      return;
+    }
 
 
-/* =========================
-   SÉCURITÉ TEXTE
-========================= */
+    const mise =
+      bankroll * percent / 100;
 
-function escapeHtml(
-  value
-){
 
-  return String(value)
+    result.innerHTML = `
+      <div class="card">
+        <strong>
+          Mise recommandée :
+        </strong>
 
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
+        <div class="cote">
+          ${mise.toFixed(2)} €
+        </div>
+      </div>
+    `;
 
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
+  });
 
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
 
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
+/* =========================================================
+   CHAT
+========================================================= */
 
-    .replaceAll(
-      "'",
-      "&#039;"
+function chargerChat() {
+
+  const messages =
+    JSON.parse(
+      localStorage.getItem("betlexChat") || "[]"
     );
+
+  afficherChat(messages);
+}
+
+
+function afficherChat(messages) {
+
+  const container =
+    document.getElementById("chatMessages");
+
+  if (!container) return;
+
+
+  container.innerHTML = "";
+
+
+  if (messages.length === 0) {
+
+    container.innerHTML = `
+      <div class="empty">
+        Aucun message pour le moment.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  messages.forEach(message => {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "message";
+
+    div.innerHTML = `
+      <strong>
+        ${escapeHtml(message.name)}
+      </strong>
+
+      <span>
+        ${escapeHtml(message.text)}
+      </span>
+    `;
+
+    container.appendChild(div);
+
+  });
 
 }
 
 
-/* =========================
-   DÉMARRAGE
-========================= */
+document.getElementById("sendMessage")
+  .addEventListener("click", () => {
+
+    const name =
+      document.getElementById("chatName")
+        .value.trim();
+
+    const text =
+      document.getElementById("chatText")
+        .value.trim();
+
+
+    if (!name || !text) {
+
+      alert("Merci de renseigner ton prénom et ton message.");
+
+      return;
+    }
+
+
+    const messages =
+      JSON.parse(
+        localStorage.getItem("betlexChat") || "[]"
+      );
+
+
+    messages.push({
+      name,
+      text,
+      date: Date.now()
+    });
+
+
+    localStorage.setItem(
+      "betlexChat",
+      JSON.stringify(messages)
+    );
+
+
+    document.getElementById("chatText").value = "";
+
+    chargerChat();
+
+  });
+
+
+/* =========================================================
+   EDITEUR DE CONTENU
+========================================================= */
+
+const contentEditorMap = {
+
+  headerTitle: "edit_headerTitle",
+  headerSubtitle: "edit_headerSubtitle",
+
+  pronosticsTitle: "edit_pronosticsTitle",
+  emptyPronostics: "edit_emptyPronostics",
+  firebaseLoading: "edit_firebaseLoading",
+
+  montanteTitle: "edit_montanteTitle",
+  montanteMiseLabel: "edit_montanteMiseLabel",
+  montanteCoteLabel: "edit_montanteCoteLabel",
+  montanteNbLabel: "edit_montanteNbLabel",
+  montanteButton: "edit_montanteButton",
+  montanteDescription: "edit_montanteDescription",
+  montanteResultLabel: "edit_montanteResultLabel",
+  montanteValidationError: "edit_montanteValidationError",
+
+  bilanTitle: "edit_bilanTitle",
+  bilanTotal: "edit_bilanTotal",
+  bilanWon: "edit_bilanWon",
+  bilanLost: "edit_bilanLost",
+  bilanPending: "edit_bilanPending",
+  bilanWinRate: "edit_bilanWinRate",
+  bilanProfit: "edit_bilanProfit",
+  bilanAverageLabel: "edit_bilanAverageLabel",
+  bilanDescription: "edit_bilanDescription",
+  bilanBase: "edit_bilanBase",
+
+  chatTitle: "edit_chatTitle",
+  chatButton: "edit_chatButton",
+  chatDescription: "edit_chatDescription",
+  chatNamePlaceholder: "edit_chatNamePlaceholder",
+  chatTextPlaceholder: "edit_chatTextPlaceholder",
+
+  budgetTitle: "edit_budgetTitle",
+  budgetBankrollLabel: "edit_budgetBankrollLabel",
+  budgetPercentLabel: "edit_budgetPercentLabel",
+  budgetButton: "edit_budgetButton",
+  budgetDescription: "edit_budgetDescription",
+  budgetValidationError: "edit_budgetValidationError",
+
+  contactTitle: "edit_contactTitle",
+  aboutTitle: "edit_aboutTitle",
+  aboutDescription: "edit_aboutDescription",
+  warningTitle: "edit_warningTitle",
+  warningDescription: "edit_warningDescription",
+  adminButton: "edit_adminButton",
+
+  navPronostics: "edit_navPronostics",
+  navMontante: "edit_navMontante",
+  navBilan: "edit_navBilan",
+  navChat: "edit_navChat",
+  navBudget: "edit_navBudget",
+  navInfos: "edit_navInfos",
+
+  resultPending: "edit_resultPending",
+  resultWon: "edit_resultWon",
+  resultLost: "edit_resultLost",
+  resultVoid: "edit_resultVoid",
+  resultWonButton: "edit_resultWonButton",
+  resultLostButton: "edit_resultLostButton",
+  resultVoidButton: "edit_resultVoidButton"
+};
+
+
+function chargerEditeurContenu() {
+
+  const data = {
+    ...DEFAULT_CONTENT,
+    ...contenuData
+  };
+
+
+  Object.entries(contentEditorMap)
+    .forEach(([key, inputId]) => {
+
+      const input =
+        document.getElementById(inputId);
+
+      if (input) {
+        input.value = data[key] ?? "";
+      }
+
+    });
+
+}
+
+
+document.getElementById("reloadContent")
+  .addEventListener(
+    "click",
+    chargerEditeurContenu
+  );
+
+
+document.getElementById("saveContent")
+  .addEventListener(
+    "click",
+    enregistrerContenu
+  );
+
+
+async function enregistrerContenu() {
+
+  if (
+    !auth.currentUser ||
+    auth.currentUser.uid !== ADMIN_UID
+  ) {
+
+    afficherMessageContenu(
+      "Tu dois être administrateur pour modifier le contenu.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const nouveauContenu = {};
+
+
+  Object.entries(contentEditorMap)
+    .forEach(([key, inputId]) => {
+
+      const input =
+        document.getElementById(inputId);
+
+      if (input) {
+        nouveauContenu[key] =
+          input.value.trim();
+      }
+
+    });
+
+
+  try {
+
+    await update(
+      ref(db, "content"),
+      nouveauContenu
+    );
+
+
+    afficherMessageContenu(
+      "✅ Tous les textes ont été enregistrés avec succès.",
+      "success"
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    afficherMessageContenu(
+      "❌ Impossible d'enregistrer les textes.",
+      "error"
+    );
+
+  }
+
+}
+
+
+function afficherMessageContenu(
+  message,
+  type
+) {
+
+  const box =
+    document.getElementById("contentMessage");
+
+  box.textContent = message;
+
+  box.className =
+    type === "success"
+      ? "content-success"
+      : "content-error";
+
+}
+
+
+/* =========================================================
+   DEMARRAGE
+========================================================= */
 
 chargerPronostics();
-
+chargerContenu();
 chargerChat();
 
 </script>
