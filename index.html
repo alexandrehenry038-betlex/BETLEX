@@ -3,55 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b1220">
-
+<meta name="theme-color" content="#111111">
 <title>BETLEX</title>
 
 <style>
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background: #f3f5f8;
-    color: #111827;
-    padding-bottom: 85px;
+    background: #f4f4f4;
+    color: #111;
+    padding-bottom: 80px;
 }
-
-/* HEADER */
 
 header {
-    background: #0b1220;
+    background: #111;
     color: white;
-    padding: 22px 20px;
     text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.logo {
-    font-size: 30px;
-    font-weight: 900;
+    padding: 18px 10px;
+    font-size: 26px;
+    font-weight: bold;
     letter-spacing: 3px;
 }
 
-.subtitle {
-    margin-top: 5px;
-    color: #aab4c5;
-    font-size: 13px;
-}
-
-/* PAGES */
-
 .page {
     display: none;
-    padding: 20px;
-    max-width: 600px;
+    padding: 18px;
+    max-width: 700px;
     margin: auto;
 }
 
@@ -59,75 +40,22 @@ header {
     display: block;
 }
 
-.page-title {
-    font-size: 25px;
-    font-weight: 800;
-    margin-bottom: 8px;
+h1 {
+    font-size: 24px;
+    margin-top: 5px;
 }
 
-.page-description {
-    color: #6b7280;
-    margin-bottom: 20px;
+h2 {
+    font-size: 19px;
 }
-
-/* CARDS */
 
 .card {
     background: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border-radius: 15px;
+    padding: 16px;
+    margin: 14px 0;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
-
-.card h3 {
-    margin-bottom: 10px;
-}
-
-.date {
-    color: #6b7280;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-/* PRONOSTICS */
-
-.pick {
-    border-left: 5px solid #16a34a;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 10px;
-    margin-top: 12px;
-}
-
-.pick.medium {
-    border-left-color: #f59e0b;
-}
-
-.pick.fun {
-    border-left-color: #8b5cf6;
-}
-
-.pick.scorer {
-    border-left-color: #2563eb;
-}
-
-.pick-title {
-    font-weight: bold;
-    font-size: 17px;
-}
-
-.pick-info {
-    margin-top: 7px;
-    color: #4b5563;
-}
-
-.odds {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-/* BADGES */
 
 .badge {
     display: inline-block;
@@ -135,694 +63,354 @@ header {
     border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .safe {
-    background: #dcfce7;
-    color: #166534;
+    background: #d8f5df;
+    color: #137333;
 }
 
-.medium-badge {
-    background: #fef3c7;
-    color: #92400e;
+.semi {
+    background: #fff0c2;
+    color: #8a6100;
 }
 
-.fun-badge {
-    background: #ede9fe;
-    color: #5b21b6;
+.fun {
+    background: #ffd9d9;
+    color: #a00000;
 }
 
-.scorer-badge {
-    background: #dbeafe;
-    color: #1e40af;
+.buteur {
+    background: #ddd9ff;
+    color: #4937a8;
 }
 
-/* MONTANTE */
-
-.step {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 15px 0;
-}
-
-.step-number {
-    min-width: 35px;
-    height: 35px;
-    background: #0b1220;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cote {
+    font-size: 21px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
-/* BUDGET */
-
-input,
-textarea {
+input, select, textarea {
     width: 100%;
-    padding: 13px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    margin-top: 7px;
-    margin-bottom: 12px;
-    font-size: 16px;
+    padding: 12px;
+    margin: 7px 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 15px;
 }
 
 button {
     border: none;
-    background: #0b1220;
-    color: white;
-    padding: 13px 18px;
     border-radius: 10px;
+    padding: 12px 15px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.result {
-    margin-top: 15px;
-    background: #f1f5f9;
-    padding: 15px;
-    border-radius: 10px;
+.primary {
+    background: #111;
+    color: white;
+    width: 100%;
 }
 
-/* CHAT */
-
-.chat-box {
-    height: 350px;
-    overflow-y: auto;
-    background: #eef2f7;
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 12px;
+.delete {
+    background: #d93025;
+    color: white;
 }
 
-.message {
-    background: white;
-    padding: 10px 12px;
-    border-radius: 12px;
-    margin-bottom: 10px;
+.edit {
+    background: #eee;
+    color: #111;
 }
-
-.message strong {
-    display: block;
-    margin-bottom: 4px;
-}
-
-.chat-input {
-    display: flex;
-    gap: 8px;
-}
-
-.chat-input input {
-    margin: 0;
-}
-
-/* BILAN */
-
-.stat {
-    text-align: center;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 12px;
-    margin-bottom: 10px;
-}
-
-.stat-number {
-    font-size: 28px;
-    font-weight: 900;
-}
-
-/* NAVIGATION */
 
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 75px;
     background: white;
-    border-top: 1px solid #e5e7eb;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 20;
+    border-top: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    z-index: 10;
 }
 
-.nav-button {
-    background: transparent;
-    color: #6b7280;
-    padding: 5px;
-    font-size: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
+.bottom-nav button {
+    background: white;
+    border-radius: 0;
+    padding: 10px 2px;
+    font-size: 11px;
 }
 
-.nav-button span {
-    font-size: 21px;
+.bottom-nav button.active {
+    background: #111;
+    color: white;
 }
 
-.nav-button.active {
-    color: #0b1220;
-}
-
-/* DISCLAIMER */
-
-.disclaimer {
-    font-size: 12px;
-    color: #6b7280;
-    line-height: 1.5;
+.admin-box {
+    border: 2px dashed #111;
+    padding: 15px;
+    border-radius: 15px;
     margin-top: 20px;
 }
 
+.small {
+    color: #666;
+    font-size: 13px;
+}
+
+.success {
+    color: #137333;
+    font-weight: bold;
+}
+
+.chat-message {
+    background: #eee;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 8px 0;
+}
 </style>
 </head>
 
-
 <body>
 
-<header>
+<header>BETLEX</header>
 
-<div class="logo">BETLEX</div>
+<!-- PRONOSTICS -->
+<section id="pronostics" class="page active">
 
-<div class="subtitle">
-Pronostics sportifs • Analyse • Gestion
-</div>
+<h1>🎯 Pronostic du jour</h1>
 
-</header>
+<p class="small" id="datePronostic"></p>
 
-
-<!-- ================= PRONOSTIC ================= -->
-
-<section id="pronostic" class="page active">
-
-<div class="page-title">
-🏠 Pronostic du jour
-</div>
-
-<div class="page-description">
-Les sélections Betlex du jour
-</div>
-
-
-<div class="card">
-
-<div class="date">
-📅 10 septembre 2026
-</div>
-
-
-<div class="pick">
-
-<span class="badge safe">
-SAFE
-</span>
-
-<div class="pick-title">
-Équipe A — Équipe B
-</div>
-
-<div class="pick-info">
-Pronostic : Plus de 1,5 buts
-</div>
-
-<div class="odds">
-Cote : 1.35
-</div>
-
-</div>
-
-
-<div class="pick medium">
-
-<span class="badge medium-badge">
-SEMI-SAFE
-</span>
-
-<div class="pick-title">
-Joueur C
-</div>
-
-<div class="pick-info">
-Pronostic : Joueur C — 1 tir cadré
-</div>
-
-<div class="odds">
-Cote : 1.60
-</div>
-
-</div>
-
-
-<div class="pick fun">
-
-<span class="badge fun-badge">
-FUN
-</span>
-
-<div class="pick-title">
-Équipe D — Équipe E
-</div>
-
-<div class="pick-info">
-Pronostic : Victoire Équipe D
-</div>
-
-<div class="odds">
-Cote : 2.20
-</div>
-
-</div>
-
-
-<div class="pick scorer">
-
-<span class="badge scorer-badge">
-BUTEUR
-</span>
-
-<div class="pick-title">
-Joueur F
-</div>
-
-<div class="pick-info">
-Pronostic : Joueur F buteur
-</div>
-
-<div class="odds">
-Cote : 2.10
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>⚠️ Rappel Betlex</h3>
-
-<p>
-Un pronostic n'est jamais garanti.
-Jouez uniquement ce que vous pouvez vous permettre de perdre.
-</p>
-
-</div>
+<div id="listePronostics"></div>
 
 </section>
 
 
-<!-- ================= MONTANTE ================= -->
-
+<!-- MONTANTE -->
 <section id="montante" class="page">
 
-<div class="page-title">
-📈 Montante
-</div>
-
-<div class="page-description">
-Suivez une progression étape par étape.
-</div>
-
+<h1>📈 Montante</h1>
 
 <div class="card">
-
-<h3>Comment fonctionne la montante ?</h3>
-
-<div class="step">
-
-<div class="step-number">1</div>
-
-<div>
-Définir une petite mise de départ.
-</div>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">2</div>
-
-<div>
-Choisir un pronostic avec une cote raisonnable.
-</div>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">3</div>
-
-<div>
-Après un résultat positif, calculer la prochaine étape.
-</div>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">4</div>
-
-<div>
-S'arrêter lorsque la limite prévue est atteinte.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>Calculateur</h3>
 
 <label>Mise de départ (€)</label>
+<input type="number" id="mise" value="10">
 
-<input id="miseMontante" type="number" placeholder="Ex : 5">
+<label>Cote moyenne</label>
+<input type="number" id="coteMoyenne" value="1.50" step="0.01">
 
-<label>Cote</label>
+<label>Nombre d'étapes</label>
+<input type="number" id="etapes" value="5">
 
-<input id="coteMontante" type="number" step="0.01" placeholder="Ex : 1.50">
-
-<button onclick="calculerMontante()">
+<button class="primary" onclick="calculerMontante()">
 Calculer
 </button>
 
-<div id="resultMontante" class="result">
-Résultat...
-</div>
+<div id="resultatMontante"></div>
 
 </div>
 
 </section>
 
 
-<!-- ================= BILAN ================= -->
-
+<!-- BILAN -->
 <section id="bilan" class="page">
 
-<div class="page-title">
-📊 Bilan
-</div>
-
-<div class="page-description">
-Les performances des pronostics Betlex.
-</div>
-
+<h1>📊 Bilan</h1>
 
 <div class="card">
 
-<div class="stat">
+<h2>Statistiques</h2>
 
-<div class="stat-number">
-0
-</div>
-
-Pronostics gagnants
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-number">
-0
-</div>
-
-Pronostics perdants
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-number">
-0%
-</div>
-
-Taux de réussite
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-number">
-0 €
-</div>
-
-Bénéfice / perte
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>📅 Historique</h3>
-
-<p>
-Les résultats des prochains pronostics apparaîtront ici.
-</p>
+<p>Pronostics : <strong id="totalPronostics">0</strong></p>
+<p>Gagnés : <strong id="gagnes">0</strong></p>
+<p>Perdus : <strong id="perdus">0</strong></p>
 
 </div>
 
 </section>
 
 
-<!-- ================= CHAT ================= -->
-
+<!-- CHAT -->
 <section id="chat" class="page">
 
-<div class="page-title">
-💬 Chat Betlex
-</div>
-
-<div class="page-description">
-Discutez avec la communauté.
-</div>
-
+<h1>💬 Chat</h1>
 
 <div class="card">
 
-<div id="chatBox" class="chat-box">
+<p class="small">
+Prototype du chat Betlex.
+</p>
 
-<div class="message">
+<div id="messages"></div>
 
-<strong>Betlex</strong>
+<input id="messageInput" placeholder="Écrire un message...">
 
-Bienvenue sur le chat Betlex 👋
-
-</div>
-
-</div>
-
-
-<div class="chat-input">
-
-<input
-id="chatInput"
-type="text"
-placeholder="Votre message..."
->
-
-<button onclick="sendMessage()">
+<button class="primary" onclick="sendMessage()">
 Envoyer
 </button>
 
 </div>
 
-</div>
-
 </section>
 
 
-<!-- ================= BUDGET ================= -->
-
+<!-- BUDGET -->
 <section id="budget" class="page">
 
-<div class="page-title">
-💰 Gérez son budget
-</div>
-
-<div class="page-description">
-Définissez vos limites avant de jouer.
-</div>
-
+<h1>💰 Gérer son budget</h1>
 
 <div class="card">
 
-<h3>Mon budget</h3>
-
 <label>Budget disponible (€)</label>
+<input type="number" id="budgetTotal" value="100">
 
-<input
-id="budgetTotal"
-type="number"
-placeholder="Ex : 100"
->
+<label>Mise prévue (€)</label>
+<input type="number" id="miseBudget" value="5">
 
-
-<label>Montant maximum par pari (€)</label>
-
-<input
-id="budgetPari"
-type="number"
-placeholder="Ex : 5"
->
-
-
-<button onclick="calculerBudget()">
+<button class="primary" onclick="calculerBudget()">
 Calculer
 </button>
 
-
-<div id="budgetResult" class="result">
-Entrez vos informations.
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>🛑 Règles importantes</h3>
-
-<p>
-• Ne jamais jouer l'argent nécessaire à vos dépenses.
-</p>
-
-<p>
-• Fixez une limite avant de commencer.
-</p>
-
-<p>
-• Ne poursuivez pas vos pertes.
-</p>
-
-<p>
-• Faites des pauses.
-</p>
+<div id="resultatBudget"></div>
 
 </div>
 
 </section>
 
 
-<!-- ================= CONTACT ================= -->
-
+<!-- CONTACT -->
 <section id="contact" class="page">
 
-<div class="page-title">
-ℹ️ Contact & présentation
-</div>
+<h1>ℹ️ Contact & présentation</h1>
 
 <div class="card">
 
-<h3>BETLEX</h3>
+<h2>Bienvenue sur BETLEX</h2>
 
 <p>
-Betlex est une application dédiée aux passionnés
-de sport et d'analyse de pronostics.
+BETLEX est une application destinée à présenter
+des pronostics sportifs et à aider les utilisateurs
+à gérer leurs mises.
 </p>
 
-<br>
-
 <p>
-Notre objectif est de proposer une présentation
-simple, claire et accessible des sélections sportives.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>📩 Contact</h3>
-
-<p>
-Pour contacter Betlex :
-</p>
-
-<br>
-
-<p>
-Email : contact@betlex.fr
+⚠️ Les paris comportent des risques.
+Jouez de manière responsable.
 </p>
 
 </div>
 
 
-<div class="card">
+<div class="admin-box">
 
-<h3>⚠️ Jeu responsable</h3>
+<h2>🔐 Administration</h2>
 
-<p>
-Betlex ne garantit aucun résultat.
-Les paris sportifs comportent des risques de perte
-d'argent.
+<p class="small">
+Cette version permet de gérer les pronostics
+localement sur cet appareil.
 </p>
 
-</div>
-
-
-<div class="disclaimer">
-
-Betlex est un projet indépendant.
-Les informations proposées sont fournies à titre
-informatif et ne constituent pas une garantie de gain.
+<button class="primary" onclick="ouvrirAdmin()">
+Ouvrir l'administration
+</button>
 
 </div>
 
 </section>
 
 
-<!-- ================= NAVIGATION ================= -->
+<!-- ADMINISTRATION -->
+<section id="admin" class="page">
+
+<h1>🔐 Administration Betlex</h1>
+
+<div class="card">
+
+<h2>Ajouter / modifier un pronostic</h2>
+
+<label>Catégorie</label>
+
+<select id="adminCategorie">
+
+<option value="SAFE">SAFE</option>
+<option value="SEMI-SAFE">SEMI-SAFE</option>
+<option value="FUN">FUN</option>
+<option value="BUTEUR">BUTEUR</option>
+
+</select>
+
+<label>Match / joueur</label>
+
+<input id="adminMatch"
+placeholder="Ex : PSG - Marseille">
+
+<label>Pronostic</label>
+
+<input id="adminPronostic"
+placeholder="Ex : PSG gagne">
+
+<label>Cote</label>
+
+<input id="adminCote"
+type="number"
+step="0.01"
+placeholder="1.50">
+
+<button class="primary" onclick="ajouterPronostic()">
+➕ Ajouter le pronostic
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Pronostics actuels</h2>
+
+<div id="adminListe"></div>
+
+</div>
+
+
+<button class="edit" onclick="showPage('contact')">
+⬅️ Retour
+</button>
+
+</section>
+
+
+<!-- NAVIGATION -->
 
 <nav class="bottom-nav">
 
-<button class="nav-button active" onclick="showPage('pronostic', this)">
-<span>🏠</span>
-Pronostics
+<button class="active" onclick="showPage('pronostics', this)">
+🎯<br>Pronostics
 </button>
 
-
-<button class="nav-button" onclick="showPage('montante', this)">
-<span>📈</span>
-Montante
+<button onclick="showPage('montante', this)">
+📈<br>Montante
 </button>
 
-
-<button class="nav-button" onclick="showPage('bilan', this)">
-<span>📊</span>
-Bilan
+<button onclick="showPage('bilan', this)">
+📊<br>Bilan
 </button>
 
-
-<button class="nav-button" onclick="showPage('chat', this)">
-<span>💬</span>
-Chat
+<button onclick="showPage('chat', this)">
+💬<br>Chat
 </button>
 
-
-<button class="nav-button" onclick="showPage('budget', this)">
-<span>💰</span>
-Budget
+<button onclick="showPage('budget', this)">
+💰<br>Budget
 </button>
 
-
-<button class="nav-button" onclick="showPage('contact', this)">
-<span>ℹ️</span>
-Contact
+<button onclick="showPage('contact', this)">
+ℹ️<br>Contact
 </button>
 
 </nav>
@@ -830,120 +418,390 @@ Contact
 
 <script>
 
-/* NAVIGATION */
+let pronostics = JSON.parse(
+    localStorage.getItem("betlexPronostics")
+) || [
+
+{
+    categorie: "SAFE",
+    match: "Équipe A - Équipe B",
+    pronostic: "Plus de 1,5 buts",
+    cote: "1.35"
+},
+
+{
+    categorie: "SEMI-SAFE",
+    match: "Joueur C",
+    pronostic: "1 tir cadré",
+    cote: "1.60"
+},
+
+{
+    categorie: "FUN",
+    match: "Équipe D - Équipe E",
+    pronostic: "Victoire Équipe D",
+    cote: "2.20"
+},
+
+{
+    categorie: "BUTEUR",
+    match: "Joueur F",
+    pronostic: "Joueur F buteur",
+    cote: "2.10"
+}
+
+];
+
+
+function sauvegarder() {
+
+localStorage.setItem(
+"betlexPronostics",
+JSON.stringify(pronostics)
+);
+
+}
+
+
+function afficherPronostics() {
+
+const liste =
+document.getElementById("listePronostics");
+
+liste.innerHTML = "";
+
+pronostics.forEach(p => {
+
+let classe = "";
+
+if(p.categorie === "SAFE")
+classe = "safe";
+
+if(p.categorie === "SEMI-SAFE")
+classe = "semi";
+
+if(p.categorie === "FUN")
+classe = "fun";
+
+if(p.categorie === "BUTEUR")
+classe = "buteur";
+
+liste.innerHTML += `
+
+<div class="card">
+
+<span class="badge ${classe}">
+${p.categorie}
+</span>
+
+<h2>${p.match}</h2>
+
+<p>
+<strong>Pronostic :</strong>
+${p.pronostic}
+</p>
+
+<div class="cote">
+Cote ${p.cote}
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("totalPronostics").innerText =
+pronostics.length;
+
+}
+
+
+function afficherAdmin() {
+
+const liste =
+document.getElementById("adminListe");
+
+liste.innerHTML = "";
+
+pronostics.forEach((p, index) => {
+
+liste.innerHTML += `
+
+<div class="card">
+
+<strong>${p.categorie}</strong>
+
+<p>${p.match}</p>
+
+<p>${p.pronostic}</p>
+
+<p>Cote : ${p.cote}</p>
+
+<button class="delete"
+onclick="supprimerPronostic(${index})">
+Supprimer
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function ajouterPronostic() {
+
+const categorie =
+document.getElementById("adminCategorie").value;
+
+const match =
+document.getElementById("adminMatch").value;
+
+const pronostic =
+document.getElementById("adminPronostic").value;
+
+const cote =
+document.getElementById("adminCote").value;
+
+
+if(!match || !pronostic || !cote) {
+
+alert("Merci de remplir tous les champs.");
+
+return;
+
+}
+
+
+pronostics.push({
+
+categorie: categorie,
+match: match,
+pronostic: pronostic,
+cote: cote
+
+});
+
+
+sauvegarder();
+
+afficherPronostics();
+
+afficherAdmin();
+
+
+document.getElementById("adminMatch").value = "";
+document.getElementById("adminPronostic").value = "";
+document.getElementById("adminCote").value = "";
+
+alert("Pronostic ajouté !");
+
+}
+
+
+function supprimerPronostic(index) {
+
+if(confirm("Supprimer ce pronostic ?")) {
+
+pronostics.splice(index, 1);
+
+sauvegarder();
+
+afficherPronostics();
+
+afficherAdmin();
+
+}
+
+}
+
+
+function ouvrirAdmin() {
+
+showPage("admin");
+
+afficherAdmin();
+
+}
+
 
 function showPage(pageId, button) {
 
-    document.querySelectorAll('.page').forEach(function(page) {
-        page.classList.remove('active');
-    });
+document.querySelectorAll(".page")
+.forEach(page => {
 
-    document.getElementById(pageId).classList.add('active');
+page.classList.remove("active");
 
-    document.querySelectorAll('.nav-button').forEach(function(btn) {
-        btn.classList.remove('active');
-    });
+});
 
-    button.classList.add('active');
 
-    window.scrollTo(0,0);
+document.getElementById(pageId)
+.classList.add("active");
+
+
+document.querySelectorAll(".bottom-nav button")
+.forEach(btn => {
+
+btn.classList.remove("active");
+
+});
+
+
+if(button) {
+
+button.classList.add("active");
+
 }
 
+window.scrollTo(0,0);
 
-/* CALCUL MONTANTE */
+}
+
 
 function calculerMontante() {
 
-    let mise = parseFloat(
-        document.getElementById("miseMontante").value
-    );
+let mise =
+parseFloat(document.getElementById("mise").value);
 
-    let cote = parseFloat(
-        document.getElementById("coteMontante").value
-    );
+let cote =
+parseFloat(document.getElementById("coteMoyenne").value);
 
-    if (!mise || !cote) {
+let etapes =
+parseInt(document.getElementById("etapes").value);
 
-        document.getElementById("resultMontante").innerHTML =
-        "Veuillez entrer une mise et une cote.";
 
-        return;
-    }
+let resultat = mise;
 
-    let retour = mise * cote;
+for(let i = 1; i <= etapes; i++) {
 
-    let gain = retour - mise;
+resultat *= cote;
 
-    document.getElementById("resultMontante").innerHTML =
-    "Retour potentiel : <strong>" +
-    retour.toFixed(2) +
-    " €</strong><br><br>" +
-    "Gain potentiel : <strong>" +
-    gain.toFixed(2) +
-    " €</strong>";
 }
 
 
-/* BUDGET */
+document.getElementById("resultatMontante").innerHTML = `
+
+<div class="card">
+
+<h2>Résultat théorique</h2>
+
+<p>
+Après ${etapes} étapes :
+</p>
+
+<h2>${resultat.toFixed(2)} €</h2>
+
+<p class="small">
+Simulation mathématique uniquement.
+</p>
+
+</div>
+
+`;
+
+}
+
 
 function calculerBudget() {
 
-    let budget = parseFloat(
-        document.getElementById("budgetTotal").value
-    );
+let budget =
+parseFloat(document.getElementById("budgetTotal").value);
 
-    let pari = parseFloat(
-        document.getElementById("budgetPari").value
-    );
+let mise =
+parseFloat(document.getElementById("miseBudget").value);
 
-    if (!budget || !pari) {
 
-        document.getElementById("budgetResult").innerHTML =
-        "Veuillez entrer votre budget.";
+let pourcentage =
+(mise / budget) * 100;
 
-        return;
-    }
 
-    let nombre = Math.floor(budget / pari);
+document.getElementById("resultatBudget").innerHTML = `
 
-    document.getElementById("budgetResult").innerHTML =
-    "Avec ces paramètres, votre budget représente environ " +
-    "<strong>" + nombre +
-    " paris maximum</strong> de " +
-    pari.toFixed(2) + " €.";
+<div class="card">
+
+<p>
+Ta mise représente
+<strong>${pourcentage.toFixed(1)}%</strong>
+de ton budget.
+</p>
+
+</div>
+
+`;
+
 }
 
-
-/* CHAT LOCAL */
 
 function sendMessage() {
 
-    let input = document.getElementById("chatInput");
+const input =
+document.getElementById("messageInput");
 
-    let message = input.value.trim();
+const message =
+input.value.trim();
 
-    if (message === "") {
-        return;
-    }
+if(!message) return;
 
-    let chatBox = document.getElementById("chatBox");
 
-    let newMessage = document.createElement("div");
+const messages =
+JSON.parse(localStorage.getItem("betlexChat"))
+|| [];
 
-    newMessage.className = "message";
 
-    newMessage.innerHTML =
-    "<strong>Vous</strong>" +
-    message;
+messages.push(message);
 
-    chatBox.appendChild(newMessage);
+localStorage.setItem(
+"betlexChat",
+JSON.stringify(messages)
+);
 
-    input.value = "";
+input.value = "";
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+afficherChat();
+
 }
+
+
+function afficherChat() {
+
+const messages =
+JSON.parse(localStorage.getItem("betlexChat"))
+|| [];
+
+const zone =
+document.getElementById("messages");
+
+zone.innerHTML = "";
+
+messages.forEach(message => {
+
+zone.innerHTML += `
+
+<div class="chat-message">
+${message}
+</div>
+
+`;
+
+});
+
+}
+
+
+document.getElementById("datePronostic")
+.innerText =
+"Pronostics du jour — " +
+new Date().toLocaleDateString("fr-FR");
+
+
+afficherPronostics();
+
+afficherChat();
 
 </script>
 
 </body>
-  </html>
+</html>
