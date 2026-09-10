@@ -3,1627 +3,513 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#111111">
-
+<meta name="theme-color" content="#111827">
 <title>BETLEX</title>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-* {
-    box-sizing: border-box;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0b1020;
+  color:#fff;
+  min-height:100vh;
+  padding-bottom:80px;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #111;
-    padding-bottom: 80px;
+header{
+  background:#111827;
+  padding:18px 15px;
+  text-align:center;
+  border-bottom:1px solid #263248;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-header {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 18px 10px;
-    font-size: 26px;
-    font-weight: bold;
-    letter-spacing: 3px;
+header h1{
+  font-size:28px;
+  letter-spacing:2px;
 }
 
-.page {
-    display: none;
-    padding: 18px;
-    max-width: 700px;
-    margin: auto;
+header p{
+  color:#9ca3af;
+  margin-top:5px;
+  font-size:13px;
 }
 
-.page.active {
-    display: block;
+.page{
+  display:none;
+  max-width:700px;
+  margin:auto;
+  padding:20px 15px;
 }
 
-h1 {
-    font-size: 24px;
-    margin-top: 5px;
+.page.active{
+  display:block;
 }
 
-h2 {
-    font-size: 19px;
+h2{
+  margin-bottom:15px;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 16px;
-    margin: 14px 0;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+.card{
+  background:#151e30;
+  border:1px solid #273449;
+  border-radius:15px;
+  padding:17px;
+  margin-bottom:14px;
+  box-shadow:0 5px 18px rgba(0,0,0,.18);
 }
 
-.badge {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.card h3{
+  margin-bottom:9px;
 }
 
-.safe {
-    background: #d8f5df;
-    color: #137333;
+.muted{
+  color:#9ca3af;
+  font-size:13px;
 }
 
-.semi {
-    background: #fff0c2;
-    color: #8a6100;
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:9px;
+  background:#263248;
 }
 
-.fun {
-    background: #ffd9d9;
-    color: #a00000;
+.cote{
+  font-size:23px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
-.buteur {
-    background: #ddd9ff;
-    color: #4937a8;
+button{
+  border:none;
+  border-radius:10px;
+  padding:11px 14px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-top:8px;
+  background:#2563eb;
+  color:white;
 }
 
-.cote {
-    font-size: 21px;
-    font-weight: bold;
-    margin-top: 10px;
+button:hover{
+  opacity:.9;
 }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 7px 0 12px;
-    border: 1px solid #ccc;
-    border-radius: 9px;
-    font-size: 15px;
+button.danger{
+  background:#dc2626;
 }
 
-button {
-    border: none;
-    border-radius: 10px;
-    padding: 12px 15px;
-    font-weight: bold;
-    cursor: pointer;
+button.secondary{
+  background:#374151;
 }
 
-.primary {
-    background: #111;
-    color: white;
-    width: 100%;
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin-top:7px;
+  margin-bottom:12px;
+  border-radius:9px;
+  border:1px solid #344258;
+  background:#0f172a;
+  color:white;
+  font-size:15px;
 }
 
-.delete {
-    background: #d93025;
-    color: white;
-    margin-top: 8px;
+textarea{
+  min-height:90px;
+  resize:vertical;
 }
 
-.edit {
-    background: #eee;
-    color: #111;
+label{
+  font-size:13px;
+  color:#cbd5e1;
 }
 
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    border-top: 1px solid #ddd;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    z-index: 10;
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111827;
+  border-top:1px solid #263248;
+  display:flex;
+  justify-content:space-around;
+  padding:9px 3px;
+  z-index:20;
 }
 
-.bottom-nav button {
-    background: white;
-    border-radius: 0;
-    padding: 10px 2px;
-    font-size: 11px;
+.nav-btn{
+  background:none;
+  color:#9ca3af;
+  padding:5px 3px;
+  margin:0;
+  font-size:11px;
+  flex:1;
 }
 
-.bottom-nav button.active {
-    background: #111;
-    color: white;
+.nav-btn.active{
+  color:#60a5fa;
 }
 
-.small {
-    color: #666;
-    font-size: 13px;
+.nav-icon{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
 }
 
-.success {
-    color: #137333;
-    font-weight: bold;
+.admin-login{
+  max-width:450px;
+  margin:50px auto;
 }
 
-.chat-message {
-    background: #eee;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 8px 0;
+.hidden{
+  display:none!important;
 }
 
-.admin-card {
-    border: 2px solid #111;
+.center{
+  text-align:center;
 }
 
-.logout {
-    background: #d93025;
-    color: white;
-    width: 100%;
+.success{
+  color:#4ade80;
 }
 
-.login-box {
-    max-width: 500px;
-    margin: 30px auto;
+.error{
+  color:#f87171;
 }
 
-.hidden {
-    display: none !important;
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#9ca3af;
 }
 
+.admin-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.admin-actions button{
+  flex:1;
+  min-width:100px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#151e30;
+  border:1px solid #273449;
+  border-radius:14px;
+  padding:18px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.chat-box{
+  max-height:350px;
+  overflow-y:auto;
+  margin-bottom:10px;
+}
+
+.message{
+  background:#1e293b;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:8px;
+}
+
+.small{
+  font-size:12px;
+  color:#94a3b8;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #293548;
+  margin:15px 0;
+}
 </style>
 </head>
 
 <body>
 
-<header>BETLEX</header>
+<header id="mainHeader">
+  <h1>BETLEX</h1>
+  <p>Les pronostics sportifs simplement</p>
+</header>
 
-
-<!-- ========================= -->
-<!-- ESPACE UTILISATEUR -->
-<!-- ========================= -->
-
-<div id="publicApp">
-
-
-<!-- PRONOSTICS -->
-
-<section id="pronostics" class="page active">
-
-<h1>🎯 Pronostic du jour</h1>
-
-<p class="small" id="datePronostic"></p>
-
-<div id="listePronostics">
-
-<p class="small">
-Chargement des pronostics...
-</p>
-
-</div>
-
-</section>
-
-
-<!-- MONTANTE -->
-
-<section id="montante" class="page">
-
-<h1>📈 Montante</h1>
-
-<div class="card">
-
-<label>Mise de départ (€)</label>
-
-<input
-type="number"
-id="mise"
-value="10"
->
-
-<label>Cote moyenne</label>
-
-<input
-type="number"
-id="coteMoyenne"
-value="1.50"
-step="0.01"
->
-
-<label>Nombre d'étapes</label>
-
-<input
-type="number"
-id="etapes"
-value="5"
->
-
-<button
-class="primary"
-onclick="calculerMontante()"
->
-Calculer
-</button>
-
-<div id="resultatMontante"></div>
-
-</div>
-
-</section>
-
-
-<!-- BILAN -->
-
-<section id="bilan" class="page">
-
-<h1>📊 Bilan</h1>
-
-<div class="card">
-
-<h2>Statistiques</h2>
-
-<p>
-Pronostics :
-<strong id="totalPronostics">0</strong>
-</p>
-
-<p>
-Gagnés :
-<strong id="gagnes">0</strong>
-</p>
-
-<p>
-Perdus :
-<strong id="perdus">0</strong>
-</p>
-
-</div>
-
-</section>
-
-
-<!-- CHAT -->
-
-<section id="chat" class="page">
-
-<h1>💬 Chat</h1>
-
-<div class="card">
-
-<p class="small">
-Prototype du chat BETLEX.
-</p>
-
-<div id="messages"></div>
-
-<input
-id="messageInput"
-placeholder="Écrire un message..."
->
-
-<button
-class="primary"
-onclick="sendMessage()"
->
-Envoyer
-</button>
-
-</div>
-
-</section>
-
-
-<!-- BUDGET -->
-
-<section id="budget" class="page">
-
-<h1>💰 Gérer son budget</h1>
-
-<div class="card">
-
-<label>Budget disponible (€)</label>
-
-<input
-type="number"
-id="budgetTotal"
-value="100"
->
-
-<label>Mise prévue (€)</label>
-
-<input
-type="number"
-id="miseBudget"
-value="5"
->
-
-<button
-class="primary"
-onclick="calculerBudget()"
->
-Calculer
-</button>
-
-<div id="resultatBudget"></div>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section id="contact" class="page">
-
-<h1>ℹ️ Contact & présentation</h1>
-
-<div class="card">
-
-<h2>Bienvenue sur BETLEX</h2>
-
-<p>
-BETLEX est une application destinée à présenter
-des pronostics sportifs et à aider les utilisateurs
-à gérer leurs mises.
-</p>
-
-<p>
-⚠️ Les paris comportent des risques.
-Jouez de manière responsable.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- NAVIGATION -->
-
-<nav class="bottom-nav">
-
-<button
-class="active"
-onclick="showPage('pronostics', this)"
->
-🎯<br>
-Pronostics
-</button>
-
-<button
-onclick="showPage('montante', this)"
->
-📈<br>
-Montante
-</button>
-
-<button
-onclick="showPage('bilan', this)"
->
-📊<br>
-Bilan
-</button>
-
-<button
-onclick="showPage('chat', this)"
->
-💬<br>
-Chat
-</button>
-
-<button
-onclick="showPage('budget', this)"
->
-💰<br>
-Budget
-</button>
-
-<button
-onclick="showPage('contact', this)"
->
-ℹ️<br>
-Contact
-</button>
+<!-- ==================== PUBLIC ==================== -->
+
+<main id="publicApp">
+
+  <section id="pronostics" class="page active">
+    <h2>🎯 Pronostics du jour</h2>
+    <div id="publicPronostics">
+      <div class="loading">Chargement des pronostics...</div>
+    </div>
+  </section>
+
+  <section id="montante" class="page">
+    <h2>📈 Calculateur Montante</h2>
+
+    <div class="card">
+      <label>Mise de départ (€)</label>
+      <input id="montanteMise" type="number" step="0.01" value="10">
+
+      <label>Cote moyenne</label>
+      <input id="montanteCote" type="number" step="0.01" value="1.50">
+
+      <label>Nombre de paris gagnants</label>
+      <input id="montanteNb" type="number" value="5">
+
+      <button onclick="calculerMontante()">Calculer</button>
+
+      <div id="montanteResult" style="margin-top:15px"></div>
+    </div>
+  </section>
+
+  <section id="bilan" class="page">
+    <h2>📊 Bilan BETLEX</h2>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="statTotal">0</strong>
+        <span class="muted">Pronostics</span>
+      </div>
+
+      <div class="stat">
+        <strong id="statCote">0.00</strong>
+        <span class="muted">Cote moyenne</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:15px">
+      <p class="muted">
+        Le bilan est calculé automatiquement à partir des pronostics publiés.
+      </p>
+    </div>
+  </section>
+
+  <section id="chat" class="page">
+    <h2>💬 Chat BETLEX</h2>
+
+    <div class="card">
+      <div id="chatMessages" class="chat-box"></div>
+
+      <input id="chatName" placeholder="Ton prénom">
+      <textarea id="chatText" placeholder="Ton message..."></textarea>
+
+      <button onclick="sendMessage()">Envoyer</button>
+    </div>
+
+    <div class="card">
+      <p class="muted">
+        Version prototype : les messages sont enregistrés sur l'appareil.
+      </p>
+    </div>
+  </section>
+
+  <section id="budget" class="page">
+    <h2>💰 Gestion du budget</h2>
+
+    <div class="card">
+      <label>Bankroll (€)</label>
+      <input id="budgetBankroll" type="number" step="0.01" value="100">
+
+      <label>Pourcentage par pari (%)</label>
+      <input id="budgetPercent" type="number" step="0.1" value="2">
+
+      <button onclick="calculerBudget()">Calculer</button>
+
+      <div id="budgetResult" style="margin-top:15px"></div>
+    </div>
+  </section>
+
+  <section id="contact" class="page">
+    <h2>ℹ️ À propos de BETLEX</h2>
+
+    <div class="card">
+      <h3>BETLEX</h3>
+      <p class="muted">
+        BETLEX propose des pronostics sportifs classés par niveau de risque,
+        ainsi que des outils pour mieux gérer sa bankroll.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>⚠️ Attention</h3>
+      <p class="muted">
+        Les paris sportifs comportent des risques financiers.
+        Aucun pronostic n'est garanti. Jouez de manière responsable et
+        uniquement avec de l'argent que vous pouvez vous permettre de perdre.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== NAVIGATION ==================== -->
+
+<nav class="bottom-nav" id="bottomNav">
+
+  <button class="nav-btn active" onclick="showPage('pronostics',this)">
+    <span class="nav-icon">🎯</span>
+    Pronostics
+  </button>
+
+  <button class="nav-btn" onclick="showPage('montante',this)">
+    <span class="nav-icon">📈</span>
+    Montante
+  </button>
+
+  <button class="nav-btn" onclick="showPage('bilan',this)">
+    <span class="nav-icon">📊</span>
+    Bilan
+  </button>
+
+  <button class="nav-btn" onclick="showPage('chat',this)">
+    <span class="nav-icon">💬</span>
+    Chat
+  </button>
+
+  <button class="nav-btn" onclick="showPage('budget',this)">
+    <span class="nav-icon">💰</span>
+    Budget
+  </button>
+
+  <button class="nav-btn" onclick="showPage('contact',this)">
+    <span class="nav-icon">ℹ️</span>
+    Infos
+  </button>
 
 </nav>
 
-</div>
+<!-- ==================== ADMIN ==================== -->
 
+<section id="adminApp" class="hidden">
 
-<!-- ========================= -->
-<!-- ADMINISTRATION -->
-<!-- ========================= -->
+  <div class="page active">
 
-<section
-id="adminLogin"
-class="page"
->
+    <!-- Connexion -->
+    <div id="adminLogin" class="admin-login">
 
-<div class="login-box">
+      <div class="card">
 
-<h1>🔐 Administration</h1>
+        <h2>🔐 Administration BETLEX</h2>
 
-<div class="card">
+        <p class="muted">
+          Accès réservé à l'administrateur.
+        </p>
 
-<p>
-Connexion réservée à l'administrateur BETLEX.
-</p>
+        <br>
 
-<label>Email</label>
+        <label>Adresse e-mail</label>
+        <input id="adminEmail" type="email" placeholder="Adresse e-mail">
 
-<input
-type="email"
-id="adminEmail"
-placeholder="Votre email"
->
+        <label>Mot de passe</label>
+        <input id="adminPassword" type="password" placeholder="Mot de passe">
 
-<label>Mot de passe</label>
+        <button onclick="connexionAdmin()">
+          Se connecter
+        </button>
 
-<input
-type="password"
-id="adminPassword"
-placeholder="Votre mot de passe"
->
+        <p id="loginMessage" style="margin-top:12px"></p>
 
-<button
-class="primary"
-onclick="connexionAdmin()"
->
-Se connecter
-</button>
+      </div>
 
-<p
-id="loginMessage"
-class="small"
-></p>
+    </div>
 
-</div>
+    <!-- Administration -->
+    <div id="adminPanel" class="hidden">
 
-</div>
+      <div class="card">
 
-</section>
+        <h2>⚙️ Administration BETLEX</h2>
 
+        <p class="muted">
+          Connecté en tant qu'administrateur.
+        </p>
 
-<section
-id="admin"
-class="page"
->
+        <button class="secondary" onclick="retourSite()">
+          ← Retour au site
+        </button>
 
-<h1>🔐 Administration BETLEX</h1>
+        <button class="danger" onclick="deconnexionAdmin()">
+          Se déconnecter
+        </button>
 
-<div class="card">
+      </div>
 
-<h2>Ajouter un pronostic</h2>
+      <div class="card">
 
-<label>Catégorie</label>
+        <h2 id="formTitle">➕ Ajouter un pronostic</h2>
 
-<select id="adminCategorie">
+        <label>Catégorie</label>
+        <select id="adminCategorie">
+          <option value="SAFE">SAFE</option>
+          <option value="SEMI-SAFE">SEMI-SAFE</option>
+          <option value="FUN">FUN</option>
+          <option value="BUTEUR">BUTEUR</option>
+        </select>
 
-<option value="SAFE">
-SAFE
-</option>
+        <label>Match / Joueur</label>
+        <input id="adminMatch" placeholder="Ex : PSG - Marseille">
 
-<option value="SEMI-SAFE">
-SEMI-SAFE
-</option>
+        <label>Pronostic</label>
+        <input id="adminPronostic" placeholder="Ex : PSG gagne">
 
-<option value="FUN">
-FUN
-</option>
+        <label>Cote</label>
+        <input id="adminCote" type="number" step="0.01" placeholder="1.50">
 
-<option value="BUTEUR">
-BUTEUR
-</option>
+        <div class="admin-actions">
 
-</select>
+          <button onclick="enregistrerPronostic()">
+            💾 Enregistrer
+          </button>
 
+          <button class="secondary hidden" id="cancelEdit" onclick="annulerModification()">
+            Annuler
+          </button>
 
-<label>Match / joueur</label>
+        </div>
 
-<input
-id="adminMatch"
-placeholder="Ex : PSG - Marseille"
->
+        <p id="adminMessage" style="margin-top:12px"></p>
 
+      </div>
 
-<label>Pronostic</label>
+      <div class="card">
 
-<input
-id="adminPronostic"
-placeholder="Ex : PSG gagne"
->
+        <h2>📋 Pronostics actuels</h2>
 
+        <div id="adminPronostics">
+          <div class="loading">Chargement...</div>
+        </div>
 
-<label>Cote</label>
+      </div>
 
-<input
-id="adminCote"
-type="number"
-step="0.01"
-placeholder="1.50"
->
+    </div>
 
-
-<button
-class="primary"
-onclick="ajouterPronostic()"
->
-➕ Ajouter le pronostic
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>Pronostics actuels</h2>
-
-<div id="adminListe">
-
-<p class="small">
-Chargement...
-</p>
-
-</div>
-
-</div>
-
-
-<button
-class="logout"
-onclick="deconnexionAdmin()"
->
-🚪 Se déconnecter
-</button>
-
-<br><br>
-
-<button
-class="edit"
-onclick="retourPublic()"
->
-⬅️ Retour au site
-</button>
+  </div>
 
 </section>
-
-
-<!-- FIREBASE -->
 
 <script type="module">
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    deleteDoc,
-    doc,
-    updateDoc,
-    onSnapshot,
-    query,
-    orderBy
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-
-/* =====================================
-   REMPLACE CES INFORMATIONS PAR CELLES
-   DE TON PROJET FIREBASE
-   ===================================== */
-
-const firebaseConfig = {
-
-    apiKey: "TON_API_KEY",
-
-    authDomain:
-        "TON_PROJET.firebaseapp.com",
-
-    projectId:
-        "TON_PROJECT_ID",
-
-    storageBucket:
-        "TON_PROJECT_ID.firebasestorage.app",
-
-    messagingSenderId:
-        "TON_MESSAGING_SENDER_ID",
-
-    appId:
-        "TON_APP_ID"
-
-};
-
-
-/* INITIALISATION */
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
-
-
-/* =====================================
-   ADMIN AUTORISÉ
-   ===================================== */
-
-/*
-   IMPORTANT :
-
-   Remplace cette adresse par TON adresse
-   email utilisée pour ton compte Firebase.
-*/
-
-const ADMIN_EMAIL =
-"TON_EMAIL_ADMIN";
-
-
-/* =====================================
-   PRONOSTICS
-   ===================================== */
-
-let pronostics = [];
-
-
-const pronosticsRef =
-collection(db, "pronostics");
-
-
-const pronosticsQuery =
-query(
-    pronosticsRef,
-    orderBy("createdAt", "desc")
-);
-
-
-/* =====================================
-   ÉCOUTE EN TEMPS RÉEL
-   ===================================== */
-
-onSnapshot(
-    pronosticsQuery,
-    (snapshot) => {
-
-        pronostics = [];
-
-        snapshot.forEach((document) => {
-
-            pronostics.push({
-
-                id: document.id,
-
-                ...document.data()
-
-            });
-
-        });
-
-        afficherPronostics();
-
-        afficherAdmin();
-
-    },
-
-    (error) => {
-
-        console.error(error);
-
-        document.getElementById(
-            "listePronostics"
-        ).innerHTML =
-
-        `
-        <div class="card">
-        Impossible de charger les pronostics.
-        </div>
-        `;
-
-    }
-);
-
-
-/* =====================================
-   AFFICHER LES PRONOSTICS
-   ===================================== */
-
-function afficherPronostics() {
-
-    const liste =
-        document.getElementById(
-            "listePronostics"
-        );
-
-    liste.innerHTML = "";
-
-
-    if (pronostics.length === 0) {
-
-        liste.innerHTML = `
-        <div class="card">
-        Aucun pronostic disponible pour le moment.
-        </div>
-        `;
-
-        document.getElementById(
-            "totalPronostics"
-        ).innerText = 0;
-
-        return;
-    }
-
-
-    pronostics.forEach((p) => {
-
-        let classe = "";
-
-
-        if (p.categorie === "SAFE")
-            classe = "safe";
-
-
-        if (p.categorie === "SEMI-SAFE")
-            classe = "semi";
-
-
-        if (p.categorie === "FUN")
-            classe = "fun";
-
-
-        if (p.categorie === "BUTEUR")
-            classe = "buteur";
-
-
-        liste.innerHTML += `
-
-        <div class="card">
-
-            <span class="badge ${classe}">
-                ${p.categorie}
-            </span>
-
-            <h2>
-                ${p.match}
-            </h2>
-
-            <p>
-                <strong>Pronostic :</strong>
-                ${p.pronostic}
-            </p>
-
-            <div class="cote">
-                Cote ${p.cote}
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-
-    document.getElementById(
-        "totalPronostics"
-    ).innerText = pronostics.length;
-
-}
-
-
-/* =====================================
-   CONNEXION ADMIN
-   ===================================== */
-
-window.connexionAdmin =
-async function() {
-
-    const email =
-        document.getElementById(
-            "adminEmail"
-        ).value.trim();
-
-
-    const password =
-        document.getElementById(
-            "adminPassword"
-        ).value;
-
-
-    const message =
-        document.getElementById(
-            "loginMessage"
-        );
-
-
-    if (!email || !password) {
-
-        message.innerText =
-            "Remplis tous les champs.";
-
-        return;
-    }
-
-
-    try {
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-    } catch (error) {
-
-        console.error(error);
-
-        message.innerText =
-            "Email ou mot de passe incorrect.";
-
-    }
-
-};
-
-
-/* =====================================
-   SURVEILLANCE CONNEXION
-   ===================================== */
-
-onAuthStateChanged(
-    auth,
-    (user) => {
-
-        if (user) {
-
-            if (
-                user.email.toLowerCase()
-                === ADMIN_EMAIL.toLowerCase()
-            ) {
-
-                showAdmin();
-
-            } else {
-
-                signOut(auth);
-
-                alert(
-                    "Ce compte n'est pas autorisé."
-                );
-
-                retourPublic();
-
-            }
-
-        }
-
-    }
-);
-
-
-/* =====================================
-   AFFICHER ADMIN
-   ===================================== */
-
-function showAdmin() {
-
-    document.getElementById(
-        "publicApp"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-        "adminLogin"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "admin"
-    ).classList.add("active");
-
-
-    afficherAdmin();
-
-    window.scrollTo(0, 0);
-
-}
-
-
-/* =====================================
-   ADMIN : AFFICHER LES PRONOSTICS
-   ===================================== */
-
-function afficherAdmin() {
-
-    const liste =
-        document.getElementById(
-            "adminListe"
-        );
-
-
-    if (!liste) return;
-
-
-    liste.innerHTML = "";
-
-
-    if (pronostics.length === 0) {
-
-        liste.innerHTML = `
-        <p class="small">
-        Aucun pronostic.
-        </p>
-        `;
-
-        return;
-    }
-
-
-    pronostics.forEach((p) => {
-
-        liste.innerHTML += `
-
-        <div class="card admin-card">
-
-            <strong>
-                ${p.categorie}
-            </strong>
-
-            <p>
-                ${p.match}
-            </p>
-
-            <p>
-                ${p.pronostic}
-            </p>
-
-            <p>
-                Cote : ${p.cote}
-            </p>
-
-            <button
-                class="edit"
-                onclick="modifierPronostic('${p.id}')"
-            >
-                ✏️ Modifier
-            </button>
-
-            <button
-                class="delete"
-                onclick="supprimerPronostic('${p.id}')"
-            >
-                🗑️ Supprimer
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-/* =====================================
-   AJOUTER
-   ===================================== */
-
-window.ajouterPronostic =
-async function() {
-
-    if (!auth.currentUser) {
-
-        alert(
-            "Tu dois être connecté."
-        );
-
-        return;
-    }
-
-
-    const categorie =
-        document.getElementById(
-            "adminCategorie"
-        ).value;
-
-
-    const match =
-        document.getElementById(
-            "adminMatch"
-        ).value.trim();
-
-
-    const pronostic =
-        document.getElementById(
-            "adminPronostic"
-        ).value.trim();
-
-
-    const cote =
-        document.getElementById(
-            "adminCote"
-        ).value.trim();
-
-
-    if (!match || !pronostic || !cote) {
-
-        alert(
-            "Merci de remplir tous les champs."
-        );
-
-        return;
-    }
-
-
-    try {
-
-        await addDoc(
-            collection(db, "pronostics"),
-            {
-
-                categorie:
-                    categorie,
-
-                match:
-                    match,
-
-                pronostic:
-                    pronostic,
-
-                cote:
-                    cote,
-
-                createdAt:
-                    Date.now()
-
-            }
-        );
-
-
-        document.getElementById(
-            "adminMatch"
-        ).value = "";
-
-
-        document.getElementById(
-            "adminPronostic"
-        ).value = "";
-
-
-        document.getElementById(
-            "adminCote"
-        ).value = "";
-
-
-        alert(
-            "Pronostic ajouté !"
-        );
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Erreur lors de l'ajout."
-        );
-
-    }
-
-};
-
-
-/* =====================================
-   MODIFIER
-   ===================================== */
-
-window.modifierPronostic =
-async function(id) {
-
-    const p =
-        pronostics.find(
-            item => item.id === id
-        );
-
-
-    if (!p) return;
-
-
-    const match =
-        prompt(
-            "Match / joueur :",
-            p.match
-        );
-
-
-    if (match === null) return;
-
-
-    const pronostic =
-        prompt(
-            "Pronostic :",
-            p.pronostic
-        );
-
-
-    if (pronostic === null) return;
-
-
-    const cote =
-        prompt(
-            "Cote :",
-            p.cote
-        );
-
-
-    if (cote === null) return;
-
-
-    const categorie =
-        prompt(
-            "Catégorie (SAFE / SEMI-SAFE / FUN / BUTEUR) :",
-            p.categorie
-        );
-
-
-    if (categorie === null) return;
-
-
-    try {
-
-        await updateDoc(
-            doc(
-                db,
-                "pronostics",
-                id
-            ),
-            {
-
-                match:
-                    match,
-
-                pronostic:
-                    pronostic,
-
-                cote:
-                    cote,
-
-                categorie:
-                    categorie.toUpperCase()
-
-            }
-        );
-
-
-        alert(
-            "Pronostic modifié !"
-        );
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Erreur lors de la modification."
-        );
-
-    }
-
-};
-
-
-/* =====================================
-   SUPPRIMER
-   ===================================== */
-
-window.supprimerPronostic =
-async function(id) {
-
-    if (
-        !confirm(
-            "Supprimer ce pronostic ?"
-        )
-    ) return;
-
-
-    try {
-
-        await deleteDoc(
-            doc(
-                db,
-                "pronostics",
-                id
-            )
-        );
-
-
-        alert(
-            "Pronostic supprimé."
-        );
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Erreur lors de la suppression."
-        );
-
-    }
-
-};
-
-
-/* =====================================
-   DÉCONNEXION
-   ===================================== */
-
-window.deconnexionAdmin =
-async function() {
-
-    await signOut(auth);
-
-    retourPublic();
-
-};
-
-
-/* =====================================
-   RETOUR SITE
-   ===================================== */
-
-window.retourPublic =
-function() {
-
-    document.getElementById(
-        "admin"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "adminLogin"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "publicApp"
-    ).classList.remove("hidden");
-
-
-    showPage("pronostics");
-
-};
-
-
-/* =====================================
-   NAVIGATION
-   ===================================== */
-
-window.showPage =
-function(pageId, button) {
-
-    document.querySelectorAll(
-        "#publicApp .page"
-    ).forEach(page => {
-
-        page.classList.remove(
-            "active"
-        );
-
-    });
-
-
-    const page =
-        document.getElementById(pageId);
-
-
-    if (page)
-        page.classList.add("active");
-
-
-    document.querySelectorAll(
-        ".bottom-nav button"
-    ).forEach(btn => {
-
-        btn.classList.remove(
-            "active"
-        );
-
-    });
-
-
-    if (button)
-        button.classList.add("active");
-
-
-    window.scrollTo(0, 0);
-
-};
-
-
-/* =====================================
-   MONTANTE
-   ===================================== */
-
-window.calculerMontante =
-function() {
-
-    let mise =
-        parseFloat(
-            document.getElementById(
-                "mise"
-            ).value
-        );
-
-
-    let cote =
-        parseFloat(
-            document.getElementById(
-                "coteMoyenne"
-            ).value
-        );
-
-
-    let etapes =
-        parseInt(
-            document.getElementById(
-                "etapes"
-            ).value
-        );
-
-
-    let resultat = mise;
-
-
-    for (
-        let i = 1;
-        i <= etapes;
-        i++
-    ) {
-
-        resultat *= cote;
-
-    }
-
-
-    document.getElementById(
-        "resultatMontante"
-    ).innerHTML = `
-
-    <div class="card">
-
-        <h2>
-            Résultat théorique
-        </h2>
-
-        <p>
-            Après ${etapes} étapes :
-        </p>
-
-        <h2>
-            ${resultat.toFixed(2)} €
-        </h2>
-
-        <p class="small">
-            Simulation mathématique uniquement.
-        </p>
-
-    </div>
-
-    `;
-
-};
-
-
-/* =====================================
-   BUDGET
-   ===================================== */
-
-window.calculerBudget =
-function() {
-
-    let budget =
-        parseFloat(
-            document.getElementById(
-                "budgetTotal"
-            ).value
-        );
-
-
-    let mise =
-        parseFloat(
-            document.getElementById(
-                "miseBudget"
-            ).value
-        );
-
-
-    if (
-        !budget ||
-        budget <= 0
-    ) return;
-
-
-    let pourcentage =
-        (mise / budget) * 100;
-
-
-    document.getElementById(
-        "resultatBudget"
-    ).innerHTML = `
-
-    <div class="card">
-
-        <p>
-            Ta mise représente
-            <strong>
-                ${pourcentage.toFixed(1)}%
-            </strong>
-            de ton budget.
-        </p>
-
-    </div>
-
-    `;
-
-};
-
-
-/* =====================================
-   CHAT
-   ===================================== */
-
-window.sendMessage =
-function() {
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-
-    const message =
-        input.value.trim();
-
-
-    if (!message) return;
-
-
-    const messages =
-        JSON.parse(
-            localStorage.getItem(
-                "betlexChat"
-            )
-        ) || [];
-
-
-    messages.push(message);
-
-
-    localStorage.setItem(
-        "betlexChat",
-        JSON.stringify(messages)
-    );
-
-
-    input.value = "";
-
-
-    afficherChat();
-
-};
-
-
-function afficherChat() {
-
-    const messages =
-        JSON.parse(
-            localStorage.getItem(
-                "betlexChat"
-            )
-        ) || [];
-
-
-    const zone =
-        document.getElementById(
-            "messages"
-        );
-
-
-    zone.innerHTML = "";
-
-
-    messages.forEach(
-        message => {
-
-            zone.innerHTML += `
-
-            <div class="chat-message">
-                ${message}
-            </div>
-
-            `;
-
-        }
-    );
-
-}
-
-
-/* =====================================
-   DATE
-   ===================================== */
-
-document.getElementById(
-    "datePronostic"
-).innerText =
-"Pronostics du jour — " +
-new Date().toLocaleDateString(
-    "fr-FR"
-);
-
-
-afficherChat();
-
-
-/* =====================================
-   ACCÈS ADMIN
-
-   Pour accéder à la connexion admin,
-   utiliser :
-
-   ?admin
-
-   Exemple :
-
-   https://alexandrehenry038-betlex.github.io/BETLEX/?admin
-   ===================================== */
-
-if (
-    window.location.search
-    === "?admin"
-) {
-
-    document.getElementById(
-        "publicApp"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-        "adminLogin"
-    ).classList.add("active");
-
-}
-
-</script>
-
-</body>
-    </html>
+/
